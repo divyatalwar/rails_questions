@@ -1,0 +1,23 @@
+<h1>Listing comments</h1>
+
+<div>
+  <% for comment in @comments %>
+  <div>
+    <%= simple_format comment.description %>
+  </div>
+  <%end%>
+</div>
+<h2>New Comment </h2>
+<%= @commentable.id %>
+<%= form_for [@commentable, Comment.new] do |f| %>
+
+<div>
+  <%= f.label :decription %>
+  <%= f.text_field :description %>
+</div>
+<div>
+  <%= f.submit "submit" %>
+</div>
+<%end%>
+
+

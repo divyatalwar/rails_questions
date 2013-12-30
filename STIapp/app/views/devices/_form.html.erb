@@ -1,0 +1,48 @@
+<%= form_for(@device, as: :device) do |f| %>
+  <% if @device.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+      <ul>
+      <% @device.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.select :type , ["Network" ,"Printing"] ,prompt: "select a type" %>
+  </div>
+ <!--  <%if !f.object.type.blank? %>
+    <%#= render :partial => "edit_" + f.object.type.downcase, :locals=>{:f=>f} %>
+    <%end%> -->
+  <div class="field Network hidden">
+    <%= f.label :ethernet %><br>
+    <%= f.check_box :ethernet,:class => "abc"%>
+  </div>
+  <div class="field Network hidden">
+    <%= f.label :wifi %><br>
+    <%= f.check_box :wifi ,:class => "abc"%>
+  </div>
+   <div class="hidden Printing field">
+    <%#= label_tag "type" %><br />
+    <%= f.label :laser, "laser"  %>
+    <%= f.radio_button :laser, true ,:class=> "abc"%>
+    <%#= f.label :laser, "inkjet", :value => "false" %>
+    <%#= f.radio_button :laser, false %>
+  </div>
+ <div class="field hidden Printing">
+    <%#= label_tag "type" %><br />
+    <%= f.label :inkjet, "inkjet"  %>
+    <%= f.radio_button :inkjet, true ,:class => "abc"%>
+    <%#= f.label :laser, "inkjet", :value => "false" %>
+    <%#= f.radio_button :laser, false %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
