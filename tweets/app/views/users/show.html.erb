@@ -1,0 +1,9 @@
+<div class="page-header">
+  <%= render partial: 'user_info', locals: { user: @user } %>
+  <div>
+    <% if(current_user.id == @user.id) %>
+      <%= render partial: 'posts/create_posts' %>
+    <% end %>
+    <%= render partial: 'posts/posts', locals: { posts: @user.posts } %>
+  </div>
+</div>

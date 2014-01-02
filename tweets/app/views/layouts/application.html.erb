@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tweets</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if current_user %>
+   <%= link_to "Home", posts_path  %>
+    <%= link_to "My Profile", user_path(current_user) %>
+     <%= link_to "TimeLine",root_path %>
+  <%= link_to "Logout", destroy_user_session_path,class: 'blackButBlueOnHover',method: :delete %>
+<%end%>
+<%= yield %>
+
+</body>
+</html>

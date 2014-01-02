@@ -1,0 +1,22 @@
+<div class= "comment_panel">
+  <div class="comment">
+    <% for post in posts %>
+      <div>
+        <div class = "name">
+          <%= link_to post.user.name , post.user %>
+        </div>
+        <div class="commentator">
+          <%= simple_format(post.content)%>
+          <div class="commentator_name">
+            <%= post.created_at.to_s(:short) %>
+          </div>
+        </div> 
+        <div class="retweet"> 
+          <% if !post.creator?(current_user) %> 
+            <%=  button_to "Retweet" , clone_path(id: post.id) %>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+ </div>  

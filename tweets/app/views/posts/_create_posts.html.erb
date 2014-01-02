@@ -1,0 +1,10 @@
+<div>
+  <%= form_tag posts_path do %>
+    <div class="create_post">
+      <%= text_area_tag 'post[content]', '', :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
+    </div> 
+    <div class="post">
+      <%= submit_tag 'Post'%>
+    </div>
+  <% end %>
+</div>
