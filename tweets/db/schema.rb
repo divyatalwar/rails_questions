@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102111252) do
+ActiveRecord::Schema.define(version: 20140103113402) do
 
   create_table "followings", force: true do |t|
     t.integer  "user_id"
@@ -22,14 +22,18 @@ ActiveRecord::Schema.define(version: 20140102111252) do
 
   create_table "posts", force: true do |t|
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_posts", force: true do |t|
     t.integer  "user_id"
+    t.integer  "post_id"
     t.boolean  "retweet",     default: false
     t.integer  "shared_from"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

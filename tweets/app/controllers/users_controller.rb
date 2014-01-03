@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   
   def timeline
     users = current_user.followees + [current_user]
-    @posts = Post.by_users(users)
+    @posts = UserPost.by_users(users)
   end
 
   protected

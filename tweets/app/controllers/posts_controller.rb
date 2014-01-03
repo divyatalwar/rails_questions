@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :clone]
+  before_action :set_post, only: [:show]
+  before_action :set_user_post, only: [:clone]
 
  
   def index
-    @posts = Post.order("created_at desc").all
+    @posts = UserPost.order("created_at desc").all
     render :template => "posts/_posts", locals: { :posts => @posts }
   end
 
@@ -11,13 +12,16 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    # @user_post  = @post.user_posts.build
   end
 
   
   def create
-   @post = current_user.posts.build(post_params) 
+   @post = Post.new(post_params) 
+   @user_post = @post.user_posts.build({user_id: current_user.id})
 
     if(@post.save)
+      @user_post.save
       flash[:notice] = "post was successfully created"
     else
       flash[:alert] = "Could not be saved"
@@ -35,6 +39,14 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by(id: params[:id])
+    if(@post.nil?)
+      flash[:alert] = "Post not found"
+      redirect_to_back_or_default_url 
+    end
+  end
+
+  def set_user_post
+    @post = UserPost.find_by(id: params[:id])
     if(@post.nil?)
       flash[:alert] = "Post not found"
       redirect_to_back_or_default_url 
