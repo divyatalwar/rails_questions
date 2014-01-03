@@ -1,9 +1,12 @@
+<%if notice || alert%>
+  <p id="notice"><%= notice || alert %></p>
+<%end%>
 <div class= "comment_panel">
   <div class="comment">
     <% for post in posts %>
       <div>
         <div class = "name">
-          <%= link_to post.user.name , post.user %>
+          <%= link_to post.user.name , user_path(post.user) %>
         </div>
         <div class="commentator">
           <%= simple_format(post.content)%>
@@ -12,8 +15,13 @@
           </div>
         </div> 
         <div class="retweet"> 
-          <% if !post.creator?(current_user) %> 
+          <% if ! (post.creator?(current_user) || post.retweet) %> 
             <%=  button_to "Retweet" , clone_path(id: post.id) %>
+          <%end%>
+        </div>
+        <div class ="shared_user">
+          <%if post.retweet %>
+            Post shared from <%= post.shared_From.name %> 
           <%end%>
         </div>
       </div>

@@ -3,37 +3,26 @@ class PostsController < ApplicationController
 
  
   def index
-    @posts = Post.all
-    render :template => "posts/_posts", locals: { :posts => @posts}
+    @posts = Post.order("created_at desc").all
+    render :template => "posts/_posts", locals: { :posts => @posts }
   end
 
-  def show
-  end
+  
 
   def new
     @post = Post.new
   end
- def edit
-  end
 
+  
   def create
    @post = current_user.posts.build(post_params) 
 
     if(@post.save)
-      respond_to do |format|
-        format.html do 
-          flash[:notice] = "post was successfully created"
-          redirect_to_back_or_default_url 
-        end
-      end
+      flash[:notice] = "post was successfully created"
     else
-      respond_to do |format|
-        format.html do 
-          flash[:alert] = "Could not be saved becuase there was no content in it"
-          redirect_to_back_or_default_url 
-        end
-      end
+      flash[:alert] = "Could not be saved"
     end
+    redirect_to_back_or_default_url 
   end
 
   def clone
@@ -43,7 +32,7 @@ class PostsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
   def set_post
     @post = Post.find_by(id: params[:id])
     if(@post.nil?)

@@ -1,6 +1,6 @@
 class OmniAuth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
  
-  # skip_before_action :authorize ,only: :google_oauth2
+ skip_before_action :authorize ,only: :google_oauth2
 
 	def google_oauth2
     user = User.from_omniauth(request.env["omniauth.auth"])

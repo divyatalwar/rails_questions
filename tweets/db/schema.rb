@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140102111252) do
   create_table "posts", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
+    t.boolean  "retweet",     default: false
+    t.integer  "shared_from"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

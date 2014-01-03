@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :followees, through: :followings
   has_many :reverse_follows, class_name: "Following", foreign_key: 'followee_id'
   has_many :followers, through: :reverse_follows, source: :user
-  has_many :posts, -> { order("created_at DESC") }
+  has_many :posts, -> { order("updated_at desc") }
 
 
 

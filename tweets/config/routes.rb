@@ -1,22 +1,17 @@
 Tweets::Application.routes.draw do
  
-resources :users, only: [:edit, :update, :show, :destroy] do
-  get 'followees' , on: :member
-  get 'followers' , on: :member
-  get 'home', on: :member
+resources :users do
+  get 'timeline', on: :member
 end
-get 'my_posts', to: 'posts#mypost', as: :my_posts
 post 'clone' ,to: 'posts#clone'
-  devise_for :user, controllers: {
-    omniauth_callbacks: "omni_auth/omniauth_callbacks", 
-    registrations: "omni_auth/registrations",
-    sessions: "omni_auth/sessions"
-  }
-  resources :followings
-
-  resources :posts
-  root 'users#home'
-  resources :users
+devise_for :user, controllers: {
+  omniauth_callbacks: "omni_auth/omniauth_callbacks", 
+  registrations: "omni_auth/registrations",
+  sessions: "omni_auth/sessions"
+}
+resources :followings
+resources :posts
+root 'posts#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

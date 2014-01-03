@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
     end
 
     def redirect_to_back_or_default_url(url = root_path)
-      alert_message = "You are not authorized to view the requested page"
+    
       if request.referer
-        redirect_to :back, alert: alert_message
+        redirect_to :back
       else
-        redirect_to url, alert: alert_message
+        redirect_to url
       end
     end
 end

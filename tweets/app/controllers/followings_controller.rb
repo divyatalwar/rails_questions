@@ -3,21 +3,18 @@ class FollowingsController < ApplicationController
 
   def create
     @following = current_user.followings.build(following_params)
-
     if @following.save
-          flash[:notice] = "You are now following" + @following.followee.firstname 
-          redirect_to_back_or_default_url 
-  
-      else
-        redirect_to current_user 
-      end
- 
+      flash[:notice] = "You are now following " + @following.followee.name 
+      redirect_to_back_or_default_url 
+    else
+      redirect_to current_user 
+    end
   end
 
 
   def destroy
     if(@following.destroy)
-      flash[:notice] = "You are not following " +  @following.followee.firstname 
+      flash[:notice] = "You are now not following " +  @following.followee.name 
     end
     redirect_to_back_or_default_url 
   end
