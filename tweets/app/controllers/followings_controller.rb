@@ -7,7 +7,7 @@ class FollowingsController < ApplicationController
       flash[:notice] = "You are now following " + @following.followee.name 
       redirect_to_back_or_default_url 
     else
-      redirect_to current_user 
+      redirect_to current_user , alert:  "Some error happened.please try again" 
     end
   end
 
