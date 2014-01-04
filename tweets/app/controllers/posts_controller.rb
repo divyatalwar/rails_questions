@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show]
   before_action :set_user_post, only: [:clone]
 
  
@@ -12,16 +11,14 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    # @user_post  = @post.user_posts.build
   end
 
   
   def create
    @post = Post.new(post_params) 
-   @user_post = @post.user_posts.build({user_id: current_user.id})
+   @user_post = @post.user_posts.build({ user_id: current_user.id })
 
     if(@post.save)
-      @user_post.save
       flash[:notice] = "post was successfully created"
     else
       flash[:alert] = "Could not be saved"
@@ -30,27 +27,16 @@ class PostsController < ApplicationController
   end
 
   def clone
-    @post.clone_post(current_user)
+    @userpost.clone_post(current_user)
     redirect_to_back_or_default_url
   end
 
 
   private
 
-  def set_post
-    @post = Post.find_by(id: params[:id])
-    if(@post.nil?)
-      flash[:alert] = "Post not found"
-      redirect_to_back_or_default_url 
-    end
-  end
-
   def set_user_post
-    @post = UserPost.find_by(id: params[:id])
-    if(@post.nil?)
-      flash[:alert] = "Post not found"
-      redirect_to_back_or_default_url 
-    end
+    @post = Post.find_by(id: params[:id])
+    @userpost = @post.user_posts.find_by(id: params[:user_post_id]) if !@post.nil?
   end
 
 

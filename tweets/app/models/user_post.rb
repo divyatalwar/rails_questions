@@ -5,7 +5,7 @@ class UserPost < ActiveRecord::Base
 
   scope :by_users, ->(users) { where('user_id in (?)', users).order('created_at DESC') }
 
-
+  default_scope { order('created_at desc') }
 
   def creator?(user)
     user_id == user.id

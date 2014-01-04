@@ -15,8 +15,8 @@
           </div>
         </div> 
         <div class="retweet"> 
-          <% if ! (user_post.creator?(current_user)) %> 
-            <%=  button_to "Retweet" , clone_path(id: user_post) %>
+          <% if !(user_post.creator?(current_user)) %> 
+            <%=button_to "Retweet", clone_path(id: user_post.post_id, user_post_id: user_post) %>
           <%end%>
         </div>
         <div class ="shared_user">
