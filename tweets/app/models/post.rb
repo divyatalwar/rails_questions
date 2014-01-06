@@ -1,12 +1,14 @@
 class Post < ActiveRecord::Base
-  has_many :user_posts
-  has_many :users, through: :user_posts
-  validates :content, presence: true,:length => { :maximum => 160 }
- 
-  
-  
-  
+  include UserConcern
+  has_many :tweets
+  has_many :users, through: :tweets
+  validates :content, presence: true, :length => { :maximum => 10 }
 
-  
+  after_commit :save_associated_tweets
+
+  def save_associated_tweets
+    tweets.create({ user_id: current_user.id })
+  end
+
 
 end

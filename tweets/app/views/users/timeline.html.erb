@@ -1,4 +1,4 @@
 <div>
-  <%= render partial: 'posts/create_posts' %>
-  <%= render partial: 'posts/posts', locals: { posts: @posts } %>
+  <%= render :template => 'posts/_create_posts' %>
+  <%= render :template =>  'posts/index', locals: { :@tweets => @timeline } %>
 </div>

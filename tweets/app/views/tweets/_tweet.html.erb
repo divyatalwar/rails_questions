@@ -1,0 +1,21 @@
+.<div>
+  <div class = "name">
+    <%= link_to tweet.user.name, user_path(tweet.user) %>
+  </div>
+  <div class="commentator">
+    <%= simple_format(tweet.post.content)%>
+    <div class="commentator_name">
+      <%= tweet.created_at.to_s(:short) %>
+    </div>
+  </div> 
+  <div class="retweet"> 
+    <% if !(tweet.creator?(current_user)) %> 
+      <%= button_to "Retweet", clone_path(id: tweet.post_id, tweet_id: tweet) %>
+    <%end%>
+  </div>
+  <div class ="shared_user">
+    <%if tweet.retweeted %>
+      Post shared from <%= tweet.retweeted_from_user.name %> 
+    <%end%>
+  </div>
+</div>

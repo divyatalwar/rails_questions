@@ -3,31 +3,22 @@ class PostsController < ApplicationController
 
  
   def index
-    @posts = UserPost.order("created_at desc").all
-    render :template => "posts/_posts", locals: { :posts => @posts }
-  end
-
-  
-
-  def new
-    @post = Post.new
+    @tweets = Tweet.order(created_at: :desc)
   end
 
   
   def create
-   @post = Post.new(post_params) 
-   @user_post = @post.user_posts.build({ user_id: current_user.id })
-
+    @post = Post.new(post_params) 
     if(@post.save)
-      flash[:notice] = "post was successfully created"
+      flash[:notice] = "Post was successfully created"
     else
-      flash[:alert] = "Could not be saved"
+      flash[:alert] = "Post could not be saved because "  + @post.errors.full_messages[0].to_s
     end
     redirect_to_back_or_default_url 
   end
 
   def clone
-    @userpost.clone_post(current_user)
+    @tweet.retweet
     redirect_to_back_or_default_url
   end
 
@@ -36,7 +27,8 @@ class PostsController < ApplicationController
 
   def set_user_post
     @post = Post.find_by(id: params[:id])
-    @userpost = @post.user_posts.find_by(id: params[:user_post_id]) if !@post.nil?
+    redirect_to_back_or_default_url if @post.nil?
+    @tweet = @post.tweets.find_by(id: params[:tweet_id]) if !@post.nil?
   end
 
 

@@ -5,15 +5,10 @@ class User < ActiveRecord::Base
   has_many :followees, through: :followings
   has_many :reverse_follows, class_name: "Following", foreign_key: 'followee_id'
   has_many :followers, through: :reverse_follows, source: :user
-  has_many :user_posts
-  has_many :posts, through: :user_posts
-
-
-
-
-
+  has_many :tweets
+  has_many :posts, through: :tweets
   validates :email, :lastname, :firstname, presence: true
-  validates :email, uniqueness: true
+  validates_uniqueness_of :email, :lastname, :firstname, :case_sensitive => false
 
 
   def to_param
@@ -22,6 +17,12 @@ class User < ActiveRecord::Base
 
   def name
     firstname + " " + lastname
+  end
+
+
+  def timeline
+    @users = followees + [self]
+    Tweet.by_users(@users)
   end
 
 end

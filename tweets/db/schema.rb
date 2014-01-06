@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103113402) do
+ActiveRecord::Schema.define(version: 20140106103810) do
 
   create_table "followings", force: true do |t|
     t.integer  "user_id"
@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20140103113402) do
     t.datetime "updated_at"
   end
 
-  create_table "user_posts", force: true do |t|
+  create_table "tweets", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.boolean  "retweet",     default: false
-    t.integer  "shared_from"
+    t.boolean  "retweeted",      default: false
+    t.integer  "retweeted_from"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

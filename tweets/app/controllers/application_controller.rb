@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authorize
+  before_action :set_current_user_thread
+
 
   protected
     
@@ -12,6 +14,10 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
       !!current_user
+    end
+
+    def set_current_user_thread
+      Thread.current[:user] = current_user
     end
 
     def redirect_to_back_or_default_url(url = root_path)

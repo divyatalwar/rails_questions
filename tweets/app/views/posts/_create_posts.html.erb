@@ -1,11 +1,10 @@
-
 <div>
-  <%= form_tag posts_path do %>
+  <%= form_for @post = Post.new do |f| %>
     <div class="create_post">
-      <%= text_area_tag 'post[content]', '', :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
+      <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
     </div> 
     <div class="post">
-      <%= submit_tag 'Post'%>
+      <%= f.submit 'Post'%>
     </div>
   <% end %>
 </div>

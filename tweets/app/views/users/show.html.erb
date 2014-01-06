@@ -2,8 +2,8 @@
   <%= render partial: 'user_info', locals: { user: @user } %>
   <div>
     <% if(current_user.id == @user.id) %>
-      <%= render partial: 'posts/create_posts' %>
+      <%= render template: 'posts/_create_posts' %>
     <% end %>
-    <%= render partial: 'posts/posts', locals: { posts: @user.user_posts } %>
+    <%= render template: 'posts/index', locals: { :@tweets => @user.tweets } %>
   </div>
 </div>
