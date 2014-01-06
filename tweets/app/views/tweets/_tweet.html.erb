@@ -1,6 +1,6 @@
 .<div>
   <div class = "name">
-    <%= link_to tweet.user.name, user_path(tweet.user) %>
+    <%= link_to tweet.user.name, tweet.user %>
   </div>
   <div class="commentator">
     <%= simple_format(tweet.post.content)%>
