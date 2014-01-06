@@ -1,11 +1,11 @@
+<%= render 'shared/notice' %>
 <div>
   <%= user.name %>
 </div>
 
 <div>
- 
-    <div><%= pluralize(user.followers.count, "Follower")%></div>
-    <div><%= pluralize(user.followees.count, "Following")%></div>
+  <div><%= pluralize(user.followers.count, "Follower")%></div>
+  <div><%= pluralize(user.followees.count, "Following")%></div>
 </div>
 
 <% if (user != current_user) %>
