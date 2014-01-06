@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if(@post.save)
       flash[:notice] = "Post was successfully created"
     else
-      flash[:alert] = "Post could not be saved because "  + @post.errors.full_messages.join(" ")
+      flash[:alert] = "Post could not be saved because "  + @post.errors.full_messages.join(" ,")
     end
     redirect_to_back_or_default_url 
   end
