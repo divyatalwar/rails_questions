@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
   
   def timeline
-    @timeline = current_user.timeline
+    @tweets = current_user.timeline
   end
 
   protected

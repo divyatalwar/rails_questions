@@ -4,6 +4,6 @@
     <% if(current_user.id == @user.id) %>
       <%= render template: 'posts/_create_posts' %>
     <% end %>
-    <%= render template: 'posts/index', locals: { :@tweets => @user.tweets } %>
+    <%= render @user.tweets %>
   </div>
 </div>
