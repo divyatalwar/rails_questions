@@ -1,3 +1,4 @@
+<% #FIXME_AB: Can you make your views little more usable? -%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 </head>
 <body>
   <% if current_user %>
+  <% #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in? -%>
     <%= link_to "Home", posts_path  %>
     <%= link_to "My Profile", user_path(current_user) %>
     <%= link_to "TimeLine", timeline_user_path(current_user) %>

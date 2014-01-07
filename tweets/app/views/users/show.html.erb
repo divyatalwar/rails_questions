@@ -5,6 +5,7 @@
     <% if(current_user.id == @user.id) %>
       <%= render template: 'posts/_create_posts' %>
     <% end %>
+    <% #FIXME_AB: Can you reduce number of queries fired in below -%>
     <%= render @user.tweets %>
   </div>
 </div>

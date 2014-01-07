@@ -9,6 +9,7 @@ devise_for :user, controllers: {
   registrations: "omni_auth/registrations",
   sessions: "omni_auth/sessions"
 }
+#FIXME_AB: Do we  have all actions for these routes?
 resources :followings
 resources :posts
 root 'posts#index'

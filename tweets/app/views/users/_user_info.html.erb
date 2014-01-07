@@ -9,6 +9,7 @@
 </div>
 
 <% if (user != current_user) %>
+<% #FIXME_AB: So everytime I want to show notices I have to render this file. Don't we have a better way? am I not repeating myself again and again -%>
   <%= render 'shared/notice' %>
   <% if (current_user.followees.include?(user)) %>
     <%= button_to('Unfollow', following_path(followee_id: user.id), method: :delete, confirm: "Are you sure you want to unfollow " + user.name) %>

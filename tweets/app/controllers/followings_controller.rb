@@ -2,6 +2,7 @@ class FollowingsController < ApplicationController
   before_action :set_following, only: [:destroy]
 
   def create
+    #FIXME_AB: There is no way I can follow any user. Because I don't have a list of users where I can follow them. 
     @following = current_user.followings.build(following_params)
     if @following.save
       flash[:notice] = "You are now following " + @following.followee.name 

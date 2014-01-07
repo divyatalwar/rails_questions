@@ -1,3 +1,4 @@
+<% #FIXME_AB: Any specific reason for this dot in the next line -%>
 .<div>
   <div class = "name">
     <%= link_to tweet.user.name, tweet.user %>
@@ -9,7 +10,9 @@
     </div>
   </div> 
   <div class="retweet"> 
+    <% #FIXME_AB: I can retweet my own tweet. Do you have any check in backend? -%>
     <% if !(tweet.creator?(current_user)) %> 
+      <% #FIXME_AB: Why you are not following rest here? -%>
       <%= button_to "Retweet", clone_path(id: tweet.post_id, tweet_id: tweet) %>
     <% end %>
   </div>

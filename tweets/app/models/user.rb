@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :posts, through: :tweets
   validates :email, :lastname, :firstname, presence: true
+  #FIXME_AB: why using old formats? validates_format_of and validates_uniqueness_of
   validates_format_of :email, :with => EMAIL_FORMAT
+  #FIXME_AB: Two users cannot have same first name or last name. Why? How would you handle this?
   validates_uniqueness_of :email, :lastname, :firstname, :case_sensitive => false
 
 
@@ -22,6 +24,7 @@ class User < ActiveRecord::Base
 
 
   def timeline
+    #FIXME_AB: Why instance variable
     @users = followees + [self]
     Tweet.by_users(@users)
   end

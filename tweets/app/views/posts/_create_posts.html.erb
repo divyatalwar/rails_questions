@@ -1,5 +1,6 @@
 <%= render 'shared/notice' %>
 <div>
+  <% #FIXME_AB: Why your are doing Post.new here in views??? -%>
   <%= form_for @post = Post.new do |f| %>
     <div class="create_post">
       <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
