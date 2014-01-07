@@ -5,9 +5,6 @@ class PostsController < ApplicationController
   def index
     @tweets = Tweet.order(created_at: :desc).including_associations
   end
-
-  def new
-  end
   
   def create
     @post = Post.new(post_params) 
