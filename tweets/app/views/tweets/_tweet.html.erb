@@ -11,11 +11,11 @@
   <div class="retweet"> 
     <% if !(tweet.creator?(current_user)) %> 
       <%= button_to "Retweet", clone_path(id: tweet.post_id, tweet_id: tweet) %>
-    <%end%>
+    <% end %>
   </div>
   <div class ="shared_user">
     <%if tweet.retweeted %>
       Post shared from <%= tweet.retweeted_from_user.name %> 
-    <%end%>
+    <% end %>
   </div>
 </div>
