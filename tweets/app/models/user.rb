@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :posts, through: :tweets
   validates :email, :lastname, :firstname, presence: true
+  validates_format_of :email, :with => EMAIL_FORMAT
   validates_uniqueness_of :email, :lastname, :firstname, :case_sensitive => false
 
 
