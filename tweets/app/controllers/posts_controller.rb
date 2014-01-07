@@ -6,7 +6,6 @@ class PostsController < ApplicationController
     #FIXME_AB: including_associations for eager loading is not readable
     @tweets = Tweet.order(created_at: :desc).including_associations
   end
-
   
   def create
     @post = Post.new(post_params) 

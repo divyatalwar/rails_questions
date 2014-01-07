@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
     end
 
     def redirect_to_back_or_default_url(url = root_path)
-    
       if request.referer
         redirect_to :back
       else
