@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   include UserConcern
   has_many :tweets
   has_many :users, through: :tweets
-  validates :content, presence: true, :length => { :maximum => 160 }
+  validates :content, presence: true, :length => { :maximum => 10 }
 
   after_commit :save_associated_tweets
 

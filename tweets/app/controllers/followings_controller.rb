@@ -3,9 +3,10 @@ class FollowingsController < ApplicationController
 
   def create
     #FIXME_AB: There is no way I can follow any user. Because I don't have a list of users where I can follow them. 
+    #fixed :added a list of users on the users index
     @following = current_user.followings.build(following_params)
     if @following.save
-      flash[:notice] = "You are now following " + @following.followee.name 
+      flash[:notice] = "You are now following " + @following.followee.username 
       redirect_to_back_or_default_url 
     else
       redirect_to current_user , alert:  "Some error happened.Please try again" 
@@ -16,7 +17,7 @@ class FollowingsController < ApplicationController
 
   def destroy
     if(@following.destroy)
-      flash[:notice] = "You are now not following " +  @following.followee.name 
+      flash[:notice] = "You are now not following " +  @following.followee.username 
     end
     redirect_to_back_or_default_url 
   end
@@ -24,7 +25,7 @@ class FollowingsController < ApplicationController
   protected
 
     def set_following
-      @following = current_user.followings.find_by(followee_id: params[:followee_id])
+      @following = current_user.followings.find_by(followee_id: params[:id])
       redirect_to_back_or_default_url if @following.nil? 
     end
 

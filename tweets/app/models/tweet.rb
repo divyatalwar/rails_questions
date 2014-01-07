@@ -15,7 +15,7 @@ class Tweet < ActiveRecord::Base
     Tweet.create(post_id: post_id, user_id: current_user.id, retweeted: true, retweeted_from: user_id)
   end
 
-  def self.including_associations
+  def self.eager_loading_associations
     includes( :user, :post, :retweeted_from_user)
   end
 

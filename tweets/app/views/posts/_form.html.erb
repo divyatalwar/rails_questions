@@ -1,0 +1,11 @@
+<div>
+  <% #FIXME_AB: Why your are doing Post.new here in views??? fixed-%>
+  <%= form_for @post do |f| %>
+    <div class="create_post">
+      <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
+    </div> 
+    <div class="post">
+      <%= f.submit 'Post'%>
+    </div>
+  <% end %>
+</div>

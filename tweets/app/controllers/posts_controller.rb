@@ -1,25 +1,32 @@
 class PostsController < ApplicationController
-  before_action :set_user_post, only: [:clone]
+  before_action :set_user_post, only: [:retweet]
+  skip_before_action :authorize, only: [:index]
 
  #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in?
+ #fixed
   def index
     #FIXME_AB: including_associations for eager loading is not readable
-    @tweets = Tweet.order(created_at: :desc).including_associations
+    #fixed
+    @tweets = Tweet.order(created_at: :desc).eager_loading_associations
   end
-  
+
   def create
     @post = Post.new(post_params) 
     if(@post.save)
       flash[:notice] = "Post was successfully created"
+      redirect_to user_path(current_user.username)
     else
       #FIXME_AB: So now when the tweet is not saved due to whatever reason, I have to re-type every thing. Why?
+      #fixed
       flash[:alert] = "Post could not be saved because "  + @post.errors.full_messages.join(" ,")
+      render action: 'edit'
     end
-    redirect_to_back_or_default_url 
+    
   end
 
   #FIXME_AB: I would have named this action as retweet
-  def clone
+  #fixed
+  def retweet
     @tweet.retweet
     redirect_to_back_or_default_url
   end
@@ -28,10 +35,12 @@ class PostsController < ApplicationController
   private
 
   def set_user_post
-    @post = Post.find_by(id: params[:id])
+    @post = Post.includes(:tweets).find_by(id: params[:id])
     redirect_to_back_or_default_url if @post.nil?
     #FIXME_AB: Why can't I eager laod tweet
+    #fixed
     @tweet = @post.tweets.find_by(id: params[:tweet_id]) if !@post.nil?
+    Rails.logger.debug "!!@@ #{@tweet }"
   end
 
 

@@ -3,7 +3,7 @@ Tweets::Application.routes.draw do
 resources :users do
   get 'timeline', on: :member
 end
-post 'clone' ,to: 'posts#clone'
+post 'retweet' ,to: 'posts#retweet'
 devise_for :user, controllers: {
   omniauth_callbacks: "omni_auth/omniauth_callbacks", 
   registrations: "omni_auth/registrations",

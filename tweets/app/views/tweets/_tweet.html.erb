@@ -1,7 +1,7 @@
-<% #FIXME_AB: Any specific reason for this dot in the next line -%>
-.<div>
+<% #FIXME_AB: Any specific reason for this dot in the next line.no sir -%>
+<div>
   <div class = "name">
-    <%= link_to tweet.user.name, tweet.user %>
+    <%= link_to tweet.user.username, user_path(URI::escape(tweet.user.username)) %>
   </div>
   <div class="commentator">
     <%= simple_format(tweet.post.content)%>
@@ -10,15 +10,15 @@
     </div>
   </div> 
   <div class="retweet"> 
-    <% #FIXME_AB: I can retweet my own tweet. Do you have any check in backend? -%>
-    <% if !(tweet.creator?(current_user)) %> 
-      <% #FIXME_AB: Why you are not following rest here? -%>
-      <%= button_to "Retweet", clone_path(id: tweet.post_id, tweet_id: tweet) %>
+    <% #FIXME_AB: I can retweet my own tweet. Do you have any check in backend? #fixed -%>
+    <% if (! current_user.nil? && !tweet.creator?(current_user)) %> 
+      <% #FIXME_AB: Why you are no1t following rest here? -%>
+      <%= button_to "Retweet", retweet_path(id: tweet.post_id, tweet_id: tweet) %>
     <% end %>
   </div>
   <div class ="shared_user">
     <%if tweet.retweeted %>
-      Post shared from <%= tweet.retweeted_from_user.name %> 
+      Post shared from <%= tweet.retweeted_from_user.username %> 
     <% end %>
   </div>
 </div>

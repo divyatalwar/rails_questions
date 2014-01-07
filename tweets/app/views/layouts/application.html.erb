@@ -1,4 +1,3 @@
-<% #FIXME_AB: Can you make your views little more usable? -%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-  <% #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in? -%>
-    <%= link_to "Home", posts_path  %>
+  <%= link_to "Home", posts_path  %>
+  <% #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in? #fixed-%>
+  
+  <%if @current_user %>
     <%= link_to "My Profile", user_path(current_user) %>
     <%= link_to "TimeLine", timeline_user_path(current_user) %>
+    <%= link_to "Find people", users_path %>
     <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  <%else%>
+    <%= link_to "Login", new_user_session_path %>
   <%end%>
+    <%= render 'shared/notice' %>
   <%= yield %>
 </body>
 </html>
