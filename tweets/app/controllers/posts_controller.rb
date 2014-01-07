@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
  
   def index
-    @tweets = Tweet.order(created_at: :desc)
+    @tweets = Tweet.order(created_at: :desc).including_associations
   end
 
   

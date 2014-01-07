@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
   
   def timeline
-    @tweets = current_user.timeline
+    @tweets = current_user.timeline.including_associations
   end
 
   protected

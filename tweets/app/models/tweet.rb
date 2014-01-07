@@ -6,7 +6,6 @@ class Tweet < ActiveRecord::Base
 
   scope :by_users, ->(users) { where(user_id: users).order(created_at: :desc) }
 
-  default_scope { order(created_at: :desc) }
 
   def creator?(user)
     user_id == user.id
@@ -15,5 +14,10 @@ class Tweet < ActiveRecord::Base
   def retweet
     Tweet.create(post_id: post_id, user_id: current_user.id, retweeted: true, retweeted_from: user_id)
   end
+
+  def self.including_associations
+    includes( :user, :post, :retweeted_from_user)
+  end
+
 
 end
