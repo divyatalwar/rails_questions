@@ -11,7 +11,7 @@
   </div> 
   <div class="retweet"> 
     <% #FIXME_AB: I can retweet my own tweet. Do you have any check in backend? #fixed -%>
-    <% if (! current_user.nil? && !tweet.creator?(current_user)) %> 
+    <% if ( current_user.present? && !tweet.creator?(current_user)) %> 
       <% #FIXME_AB: Why you are no1t following rest here? #fixed -%>
       <%= button_to "Retweet", retweet_path(id: tweet) %>
     <% end %>
