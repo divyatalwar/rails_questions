@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_follows, source: :user
   has_many :tweets, dependent: :destroy
   has_many :posts, through: :tweets
-  validates :email, :lastname, :firstname, :password_confirmation, presence: true
+  validates :email, :lastname, :firstname, presence: true
   #FIXME_AB: why using old formats? validates_format_of and validates_uniqueness_of
   ##fixed
   
