@@ -10,12 +10,24 @@ class UsersController < ApplicationController
     #FIXME_AB: Can you try this url: http://localhost:3000/users/abcdefghijklmnop and let me know what is wrong with it
   
   end
+
+  def autocomplete_suggestions
+    render :json => User.get_autocomplete_suggestions
+  end
   
   def timeline
     #FIXME_AB: I guess, whenever we will be using timeline we need associations. So shouldn't we eager load associations within the timeline.
     #fixed
     @tweets = current_user.timeline
   end
+
+  def change_privacy
+    current_user.update_privacy
+    redirect_to_back_or_default_url
+  end
+
+
+
 
   protected
 

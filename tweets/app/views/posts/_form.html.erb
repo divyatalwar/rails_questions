@@ -2,8 +2,9 @@
   <% #FIXME_AB: Why your are doing Post.new here in views??? fixed-%>
   <%= form_for @post do |f| %>
     <div class="create_post">
-      <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Enter your post..' %>
+      <%= f.text_area :content,  :cols => 80, :rows => 5, placeholder: 'Enter your post..' ,:class => "tag autocomplete", data: {path: autocomplete_path(:json) }%>
     </div> 
+    <%= f.hidden_field :tags %>
     <div class="post">
       <%= f.submit 'Post'%>
     </div>

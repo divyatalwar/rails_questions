@@ -1,9 +1,10 @@
+<div class = "user_info">
 
-<div>
+<div class ="username">
   <%= user.username %>
 </div>
 
-<div>
+<div class = "status">
   <div><%= pluralize(user.followers.count, "Follower")%></div>
   <div><%= pluralize(user.followees.count, "Following")%></div>
 </div>
@@ -18,3 +19,9 @@
       <%= button_to('Follow', followings_path(followee_id: user.id))  %>
     <%end %>
 <% end %>
+<div class ="privacy_settings" >
+<% if user == current_user %>
+  <%= button_to("Make your repository " + (current_user.profile_privacy ? "public" : "private"), change_privacy_path(current_user)) %>
+<%end%>
+</div>
+</div>

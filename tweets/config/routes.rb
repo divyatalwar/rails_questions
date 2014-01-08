@@ -2,8 +2,13 @@ Tweets::Application.routes.draw do
  
 resources :users do
   get 'timeline', on: :member
+  # get 'tag_list',on: :collection
+
 end
+post 'change_privacy', to: 'users#change_privacy'
 post 'retweet' ,to: 'posts#retweet'
+get 'auto-complete', to: 'users#autocomplete_suggestions', as: :autocomplete
+
 devise_for :user, controllers: {
   omniauth_callbacks: "omni_auth/omniauth_callbacks", 
   registrations: "omni_auth/registrations",
@@ -12,7 +17,10 @@ devise_for :user, controllers: {
 #FIXME_AB: Do we  have all actions for these routes?
 #fixed
 resources :followings, only:[ :create, :destroy]
-resources :posts, only: [:create, :index, :edit]
+resources :posts, only: [:create, :index, :edit] do
+  get 'hash_tags', on: :collection
+  get 'user_tags', on: :collection
+end
 root 'posts#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

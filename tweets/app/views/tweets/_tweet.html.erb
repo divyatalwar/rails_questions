@@ -4,6 +4,13 @@
     <%= link_to tweet.user.username, user_path(tweet.user.username) %>
   </div>
   <div class="commentator">
+    <% tweet.post.content.gsub!(/#\w+/i) {|hash_tag| link_to hash_tag, hash_tags_posts_path(hash_tag: hash_tag)} %>
+     <%if !(tweet.post.tags.blank?) %>
+        <%for user in get_users(tweet.post.tags) %>
+          <% tweet.post.content.gsub!(/#{user.username}/i) {|username|  link_to(username, user_path(id: user.username))} %> 
+        <% end %>
+      <% end %>
+
     <%= simple_format(tweet.post.content)%>
     <div class="commentator_name">
       <%= tweet.created_at.to_s(:short) %>
@@ -11,7 +18,7 @@
   </div> 
   <div class="retweet"> 
     <% #FIXME_AB: I can retweet my own tweet. Do you have any check in backend? #fixed -%>
-    <% if ( current_user.present? && !tweet.creator?(current_user)) %> 
+    <% if ( current_user.present? && !tweet.creator?(current_user) && !tweet.user.profile_privacy) %> 
       <% #FIXME_AB: Why you are no1t following rest here? #fixed -%>
       <%= button_to "Retweet", retweet_path(id: tweet) %>
     <% end %>

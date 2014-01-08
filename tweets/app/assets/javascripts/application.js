@@ -11,6 +11,51 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+  $(document).ready(function(){
+    $(document).on("keyup", ".tag", function() {
+      content = $(this).val().split(' ')
+      if(content[content.length-1].indexOf("@") == 0){
+        $.ajax({
+          type: 'get',
+          url: $('.tag').data('path'), 
+          dataType: "json", 
+          success: function(data){
+            console.log(data)
+            $('.tag').autocomplete({ 
+              source: function( request, response ) {
+                response( $.ui.autocomplete.filter(
+                data, extractLast( request.term) ) );
+                console.log(request.term)
+                console.log(extractLast( request.term) )
+              },
+              minLength: 3,
+              delay: 500,
+              focus: function() {
+                return false;
+              },
+              select: function( event, ui ) {
+                var terms = split( this.value );
+                terms.pop();
+                terms.push( '@'+ ui.item.label );
+                terms.push( "" );
+                this.value = terms.join( " " );
+                return false;
+              }
+            });
+          },
+          error: function(a,b,c){
+          }
+        });
+      }
+    });
+    function split( val ) {
+      return val.split( /\s/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop().split('@')[1];
+    }
+  });

@@ -14,6 +14,7 @@
     <%= link_to "My Profile", user_path(current_user) %>
     <%= link_to "TimeLine", timeline_user_path(current_user) %>
     <%= link_to "Know each other", users_path %>
+    <%= link_to "Mentions", user_tags_posts_path %>
     <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   <%else%>
     <%= link_to "Login", new_user_session_path %>

@@ -30,4 +30,12 @@ class User < ActiveRecord::Base
     Tweet.by_users(@users).eager_loading_associations
   end
 
+  def update_privacy
+    self.update_attributes({:profile_privacy => !profile_privacy})
+  end
+
+  def self.get_autocomplete_suggestions
+    User.pluck('username')
+  end
+
 end
