@@ -10,6 +10,9 @@ class PostsController < ApplicationController
     @tweets = Tweet.order(created_at: :desc).eager_loading_associations
   end
 
+  def edit
+  end
+
   def create
     @post = current_user.posts.create(post_params)
     if(@post.persisted?)

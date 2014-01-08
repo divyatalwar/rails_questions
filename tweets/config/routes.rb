@@ -10,8 +10,9 @@ devise_for :user, controllers: {
   sessions: "omni_auth/sessions"
 }
 #FIXME_AB: Do we  have all actions for these routes?
-resources :followings
-resources :posts
+#fixed
+resources :followings, only:[ :create, :destroy]
+resources :posts, only: [:create, :index, :edit]
 root 'posts#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
