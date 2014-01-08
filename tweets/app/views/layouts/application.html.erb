@@ -7,13 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to "Home", posts_path  %>
+ 
   <% #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in? #fixed-%>
-  
+   <%= link_to "Home", posts_path  %>
   <%if @current_user %>
     <%= link_to "My Profile", user_path(current_user) %>
     <%= link_to "TimeLine", timeline_user_path(current_user) %>
-    <%= link_to "Find people", users_path %>
+    <%= link_to "Know each other", users_path %>
     <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   <%else%>
     <%= link_to "Login", new_user_session_path %>

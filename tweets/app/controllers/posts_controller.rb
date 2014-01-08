@@ -11,8 +11,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params) 
-    if(@post.save)
+    @post = current_user.posts.create(post_params)
+    if(@post.persisted?)
       flash[:notice] = "Post was successfully created"
       redirect_to user_path(current_user.username)
     else
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   #FIXME_AB: I would have named this action as retweet
   #fixed
   def retweet
-    @tweet.retweet
+    @tweet.retweet(current_user)
     redirect_to_back_or_default_url
   end
 
@@ -35,12 +35,8 @@ class PostsController < ApplicationController
   private
 
   def set_user_post
-    @post = Post.includes(:tweets).find_by(id: params[:id])
-    redirect_to_back_or_default_url if @post.nil?
-    #FIXME_AB: Why can't I eager laod tweet
-    #fixed
-    @tweet = @post.tweets.find_by(id: params[:tweet_id]) if !@post.nil?
-    Rails.logger.debug "!!@@ #{@tweet }"
+    @tweet = Tweet.find_by(id: params[:id])
+    redirect_to_back_or_default_url if @tweet.nil?
   end
 
 

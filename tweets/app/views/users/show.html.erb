@@ -3,9 +3,9 @@
   <%= render partial: 'users/user_info', locals: { user: @user } %>
   <div>
     <% if(current_user.id == @user.id) %>
-      <%= render template: 'posts/_form',locals: { :@post => @post } %>
+      <%= render template: 'posts/_form', locals: { :@post => @post } %>
     <% end %>
     <% #FIXME_AB: Can you reduce number of queries fired in below  #fixed-%>
-    <%= render @user.tweets %>
+    <%= render @user.tweets.eager_loading_associations %>
   </div>
 </div>

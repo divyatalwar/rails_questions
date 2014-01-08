@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  # before_action :get_other_users_to_follow, only: :show
   before_action :create_post, only:[ :show]
 
   def index
-    @users = User.except_current(current_user)
+    @users = User.except(current_user)
   end
 
   def show
