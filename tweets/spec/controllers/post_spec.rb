@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe PostsController do
   login_user
   before :each do   
-    request.env["HTTP_REFERER"] =  'http://test.host/admin'
+    request.env["HTTP_REFERER"] =  'http://test.host/users/myusername'
     controller.stub(:authorize).and_return(true)
   end
   describe "GET Index" do
@@ -60,17 +60,17 @@ describe PostsController do
     end
     context "when voucher is found" do
       before do
-       Post.stub(:find_by).with(id: "#{@post.id}").and_return(@post)
+       # Post.stub(:find_by).with(id: "#{@post.id}").and_return(@post)
        Tweet.stub(:find_by).with(id: "#{@tweet.id}").and_return(@tweet)
       end
       
       it "should call clone" do
         @tweet.stub(:retweet).and_return(@tweet)
-         get :clone , { id: @post.id, tweet_id: @tweet.id}
+         get :retweet , { id: @tweet.id}
       end
       context 'when change is successful' do
         before do
-          get :clone , { id: @post.id, tweet_id: @tweet.id}    
+          get :retweet , { id: @tweet.id}    
         end
         it 'should redirect to back' do
           response.should redirect_to request.env["HTTP_REFERER"]

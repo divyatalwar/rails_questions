@@ -8,12 +8,12 @@ describe UsersController do
   end
   describe 'Get Show' do
     before do
-      @user = FactoryGirl.create(:user,email: "abc@vinsol.com", firstname: "abc",lastname: "cde")
+      @user = FactoryGirl.create(:user,email: "abcefg@vinsol.com", firstname: "abc",lastname: "cde", username: "abcdefgs")
     end
 
     context "when User is found with Id" do
       before do
-       get :show, id: @user.firstname
+       get :show, id: @user.username
       end
       it "should assign @user" do
         expect(assigns(:user)).to eq(@user)
@@ -27,8 +27,8 @@ describe UsersController do
     end
     context "when User in not found with Id" do
       before do
-        @user.firstname = ""
-        get :show, id: @user.firstname
+        @user.username = ""
+        get :show, id: @user.username
       end
       it "should redirect Users Index" do
         response.should redirect_to request.env["HTTP_REFERER"]
@@ -41,16 +41,16 @@ describe UsersController do
 
   describe 'get user timeline' do
    before do
-      @user = FactoryGirl.create(:user, email: "abc@vinsol.com", firstname: "abc",lastname: "cde")
+      @user = FactoryGirl.create(:user, email: "abcde@vinsol.com", firstname: "abc",lastname: "cde", username: "abcdef")
       @user.stub(:timeline).and_return(@tweets)
     end
 
     it "assigns @users" do
-      get :timeline, id: @user.firstname
+      get :timeline, id: @user.username
       
     end
     it "should render timeline template" do
-      get :timeline, id: @user.firstname
+      get :timeline, id: @user.username
       expect(response).to render_template :timeline
     end
   end

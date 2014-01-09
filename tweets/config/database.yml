@@ -16,3 +16,10 @@ development:
   username: root
   password: root
 
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: tweets_development
+  pool: 5
+  username: root
+  password: root

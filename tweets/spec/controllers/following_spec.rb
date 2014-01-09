@@ -10,7 +10,7 @@ describe FollowingsController do
 
   describe 'Post Create' do
     before do 
-      @user = FactoryGirl.create(:user, email: "abcd@vinsol.com", firstname: "abc", lastname: "def")
+      @user = FactoryGirl.create(:user, email: "abcd@vinsol.com", firstname: "abcd", lastname: "defs", username: "username")
       @following = FactoryGirl.create(:following, followee_id: @user.id)
     end
     it 'user should call save' do
@@ -32,7 +32,7 @@ describe FollowingsController do
 
   describe "Following Destroy" do
     before do
-      @user = FactoryGirl.create(:user, email: "abcd@vinsol.com", firstname: "abc", lastname: "def")
+      @user = FactoryGirl.create(:user, email: "abcde@vinsol.com", firstname: "abcde", lastname: "defs", username: "username")
       @following = FactoryGirl.create(:following, followee_id: @user.id)
     end
     context "when following is found" do
