@@ -38,7 +38,7 @@ describe User do
   end 
   describe "is invalid without a unique email" do
     before(:each) do
-      @user = FactoryGirl.build(:user, email:"divya@vinsol.com")
+      @user = FactoryGirl.build(:user, email:"divya@vinsol.com", firstname: "divya", lastname: "abc", username: "abcdef")
     end
     it "is not valid without a unique mail" do
       @user.should_not be_valid

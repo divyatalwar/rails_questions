@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe FollowingsController do
   login_user
   before :each do   
-    request.env["HTTP_REFERER"] =  'http://test.host/users/divya'
+    request.env["HTTP_REFERER"] =  'http://test.host/users/divyatalwar'
     controller.stub(:authorize).and_return(true)
   end
 
@@ -42,12 +42,12 @@ describe FollowingsController do
       
       it "should call destroy" do
         @following.stub(:destroy).and_return(@following) 
-        delete :destroy, id: @following.id, followee_id: @user.id
+        delete :destroy, id: @user.id
       end
 
       context 'when successfully destroyed' do
         before do
-          delete :destroy, id: @following.id, followee_id: @user.id
+          delete :destroy, id: @user.id
         end
 
         it 'should redirect to back' do

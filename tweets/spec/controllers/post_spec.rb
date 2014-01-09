@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe PostsController do
   login_user
   before :each do   
-    request.env["HTTP_REFERER"] =  'http://test.host/users/myusername'
+    request.env["HTTP_REFERER"] =  'http://test.host/users/divyatalwar'
     controller.stub(:authorize).and_return(true)
   end
   describe "GET Index" do
@@ -28,7 +28,7 @@ describe PostsController do
     end
     it 'user should call save' do
       Post.should_receive(:new).and_return(@post)
-      @post.should_receive(:save).and_return(@post)
+      @post.should_receive(:persisted?).and_return(true)
       post :create , {post: FactoryGirl.attributes_for(:post)}
     end
 
@@ -44,16 +44,16 @@ describe PostsController do
 
     context 'when not saved' do
       before do
-          post :create , {post: {content: nil} }
+          post :create , {post: {content: ""} }
       end
 
-      it 'should redirect to new template' do
-        response.should redirect_to request.env["HTTP_REFERER"]
+      it 'should render edit template' do
+        response.should render_template 'edit'
       end
     end
   end
 
-   describe "Post clone" do
+   describe "Post retweet" do
     before do
       @post = FactoryGirl.create(:post)
       @tweet =  FactoryGirl.create(:tweet, post_id: @post.id)
@@ -78,4 +78,40 @@ describe PostsController do
       end
     end
   end
+
+  describe 'get post hash tags' do
+   before do
+      @post = FactoryGirl.create(:post)
+      @tweet = FactoryGirl.create(:tweet, post_id: @post.id)
+      Tweet.stub(:by_hash_tag).and_return(@tweet)
+    end
+
+    it "gets hash tags request" do
+      get :hash_tags, hash_tag: "abc"
+      
+    end
+    it "should render index template" do
+      get :hash_tags, hash_tag: "abc"
+      expect(response).to render_template :index
+    end
+  end
+
+  describe 'get post user tags' do
+   before do
+      @user = FactoryGirl.create(:user, email: "abcd@vinsol.com", firstname: "abc", lastname: "def", username:"abcdef")
+      @post = FactoryGirl.create(:post)
+      @tweet = FactoryGirl.create(:tweet, post_id: @post.id)
+      Tweet.stub(:by_user_tag).and_return(@tweet)
+    end
+
+    it "gets user tags request" do
+      get :user_tags, id: @user.username
+      
+    end
+    it "should render index template" do
+      get :user_tags, id: @user.username
+      expect(response).to render_template :index
+    end
+  end
+
 end

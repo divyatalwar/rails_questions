@@ -19,7 +19,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: tweets_development
+  database: tweets_test
   pool: 5
   username: root
   password: root
