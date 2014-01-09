@@ -69,6 +69,7 @@ padding-bottom: 2px;
 border: dotted 1px black;
 height: 162px;
 margin-right: 10px;
+float:right;
 }
 .status{
 padding-bottom: 20px;
@@ -81,6 +82,15 @@ position:absolute;
 top:6px;
 right:10px;
 }
+
+.posts{
+  padding-left: 20px;
+  position: relative;
+  top:-20px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: dotted 1px black;
+}
 .navigation_tabs{
   font-style: bold;
   font-weight: bold;
@@ -89,7 +99,28 @@ right:10px;
   padding-left: 10px;
   padding-right: 10px;
 }
+.comment_panel{
+  border:dotted 1px black;
+  width:741px;
+  padding-top: 30px;
+  background-color: #fafdff;
+  padding-bottom: 30px;
+}
 
+.comment_block {
+  padding-bottom: 30px;
+}
 .post_creation {
+  border:solid 1px black;
+  padding-left: 10px;
+  width:728px;
+  background-color: #fafdff;
 padding-top: 20px;
+padding-bottom: 30px;
+margin-bottom: 50px;
+}
+
+.information{
+display: inline-block;
+float: left;
 }

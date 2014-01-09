@@ -125,8 +125,8 @@ describe UsersController do
     end
   end
 
-   describe 'get user followees' do
-   before do
+  describe 'get user followees' do
+    before do
       @user = FactoryGirl.create(:user, email: "abcde@vinsol.com", firstname: "abc",lastname: "cde", username: "abcdef")
       @user.stub(:followers).and_return(@users)
     end

@@ -1,3 +1,6 @@
-<div>
+<% if @tweets.present? %>
+<div class = "comment_panel">
+  <div class="posts">Posts </div>
   <%= render @tweets %>
 </div>
+<%end%>

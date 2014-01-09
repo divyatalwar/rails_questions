@@ -28,10 +28,19 @@ font-style:bold-italic;
 font-size:12px;
 
 }
+.name {
+font-weight:bold;
+font-size:18px;
+padding-right:5px;
+padding-left:5px;
+}
 
 .retweet{
-position:relative;
-top:30px;
+position: relative;
+float: right;
+top: -17px;
+right: 56px;
+
 }
 
 .shared_user {
@@ -64,4 +73,10 @@ top:30px;
 
 .create_post,.post {
   display: inline-block;
+}
+.post {
+position:relative;
+top:16px;
+right:51px;
+
 }
