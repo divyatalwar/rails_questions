@@ -57,8 +57,8 @@ class PostsController < ApplicationController
   def set_tags
     params[:post][:content].gsub!(/@\w+/i) do |tag| 
       tagged_user = User.find_by(username: tag.split('@')[1])
-      tags = tagged_user.nil? ? "" : tagged_user.id
-      params[:post][:tags] += " " + tags.to_s + " "
+      user_id = tagged_user.nil? ? "" : tagged_user.id
+      params[:post][:tags] += " " + user_id.to_s + " "
       tag.delete! '@'
       
     end
