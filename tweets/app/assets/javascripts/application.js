@@ -15,7 +15,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-  $(document).ready(function(){
+$(document).ready(function(){
+  var applicationEventHandler = new ApplicationEventHandler();
+})
+var ApplicationEventHandler = function() {
+  this.init();
+}
+ApplicationEventHandler.prototype = {
+  init: function() {
+    this.autocomplete();
+    document.addEventListener("page:load", this.autocomplete());
+  },
+  autocomplete: function() {
+    var that = this;
     $(document).on("keyup", ".tag", function() {
       content = $(this).val().split(' ')
       if(content[content.length-1].indexOf("@") == 0){
@@ -24,13 +36,10 @@
           url: $('.tag').data('path'), 
           dataType: "json", 
           success: function(data){
-            console.log(data)
             $('.tag').autocomplete({ 
               source: function( request, response ) {
                 response( $.ui.autocomplete.filter(
-                data, extractLast( request.term) ) );
-                console.log(request.term)
-                console.log(extractLast( request.term) )
+                  data, that.extractLast( request.term) ) );
               },
               minLength: 3,
               delay: 500,
@@ -38,7 +47,7 @@
                 return false;
               },
               select: function( event, ui ) {
-                var terms = split( this.value );
+                var terms = that.split( this.value );
                 terms.pop();
                 terms.push( '@'+ ui.item.label );
                 terms.push( "" );
@@ -52,10 +61,11 @@
         });
       }
     });
-    function split( val ) {
-      return val.split( /\s/ );
-    }
-    function extractLast( term ) {
-      return split( term ).pop().split('@')[1];
-    }
-  });
+  },
+  split: function( val ) {
+    return val.split( /\s/ );
+  },
+  extractLast :function( term ) {
+    return this.split( term ).pop().split('@')[1];
+  }
+}

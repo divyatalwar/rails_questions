@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def update_privacy
-    self.update_attributes({:profile_privacy => !profile_privacy})
+    update_attributes({:profile_privacy => !profile_privacy})
   end
 
   def self.get_autocomplete_suggestions
