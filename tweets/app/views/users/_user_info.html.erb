@@ -1,27 +1,22 @@
 <div class = "user_info">
-
-<div class ="username">
-  <%= user.username %>
-</div>
-
-<div class = "status">
-  <div><%= pluralize(user.followers.count, "Follower")%></div>
-  <div><%= pluralize(user.followees.count, "Following")%></div>
-</div>
-
-<% if (user != current_user) %>
-<% #FIXME_AB: So everytime I want to show notices I have to render this file. Don't we have a better way? am I not repeating myself again and again #fixed -%>
-  
- <% if (current_user.followees.include?(user)) %>
-    <%= button_to('Unfollow', following_path(user.id), method: :delete,confirm: "Are you sure you want to unfollow this person?") %>
-      </div>
+  <div class ="username">
+    <%= user.username %>
+  </div>
+  <div class = "status">
+    <div><%= link_to pluralize(user.followers.count, "Follower"), followers_user_path(user.username)%></div>
+    <div><%= link_to pluralize(user.followees.count, "Following"), followees_user_path(user.username)%></div>
+  </div>
+  <% if (user != current_user) %>
+  <% #FIXME_AB: So everytime I want to show notices I have to render this file. Don't we have a better way? am I not repeating myself again and again #fixed -%>
+    <% if (current_user.followees.include?(user)) %>
+      <%= button_to('Unfollow', following_path(user.id), method: :delete, confirm: "Are you sure you want to unfollow " + user.username) %>
     <% else %>
-      <%= button_to('Follow', followings_path(followee_id: user.id))  %>
+      <%= button_to('Follow', followings_path(followee_id: user.id), confirm: "Are you sure you want to follow " + user.username)  %>
     <%end %>
-<% end %>
-<div class ="privacy_settings" >
-<% if user == current_user %>
-  <%= button_to("Make your repository " + (current_user.profile_privacy ? "public" : "private"), change_privacy_path(current_user)) %>
-<%end%>
-</div>
+  <% end %>
+  <div class ="privacy_settings" >
+    <% if user == current_user %>
+      <%= button_to("Make your profile " + (current_user.profile_privacy ? "public" : "private"), change_privacy_path(current_user)) %>
+    <%end%>
+  </div>
 </div>

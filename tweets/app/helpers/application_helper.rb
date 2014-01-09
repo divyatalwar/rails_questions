@@ -4,4 +4,5 @@ module ApplicationHelper
     tag = tags.split()
     User.where(id: tag)
   end
+  
 end

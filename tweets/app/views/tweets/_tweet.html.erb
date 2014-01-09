@@ -4,16 +4,19 @@
     <%= link_to tweet.user.username, user_path(tweet.user.username) %>
   </div>
   <div class="commentator">
-    <% tweet.post.content.gsub!(/#\w+/i) {|hash_tag| link_to hash_tag, hash_tags_posts_path(hash_tag: hash_tag)} %>
+    <% tweet.post.content.gsub!(/#\w+/) { |hashtag| link_to hashtag, hash_tags_posts_path(hash_tag: hashtag) } %>
      <%if !(tweet.post.tags.blank?) %>
-        <%for user in get_users(tweet.post.tags) %>
-          <% tweet.post.content.gsub!(/#{user.username}/i) {|username|  link_to(username, user_path(id: user.username))} %> 
+        <% get_users(tweet.post.tags).each do |user| %>
+          <% tweet.post.content.gsub!(/#{user.username}/) { |username|  link_to username, user_path(id: user.username) } %> 
         <% end %>
       <% end %>
 
     <%= simple_format(tweet.post.content)%>
     <div class="commentator_name">
-      <%= tweet.created_at.to_s(:short) %>
+      <%= tweet.created_at.to_s(:short) %><br>
+      <%if tweet.retweeted %>
+        Shared from: <%= link_to tweet.retweeted_from_user.username, user_path(tweet.retweeted_from_user.username) %> 
+      <% end %>
     </div>
   </div> 
   <div class="retweet"> 
@@ -24,8 +27,6 @@
     <% end %>
   </div>
   <div class ="shared_user">
-    <%if tweet.retweeted %>
-      Post shared from <%= tweet.retweeted_from_user.username %> 
-    <% end %>
+    
   </div>
 </div>

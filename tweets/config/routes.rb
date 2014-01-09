@@ -2,6 +2,8 @@ Tweets::Application.routes.draw do
  
 resources :users do
   get 'timeline', on: :member
+  get 'followers',  on: :member
+  get 'followees',  on: :member
   # get 'tag_list',on: :collection
 
 end

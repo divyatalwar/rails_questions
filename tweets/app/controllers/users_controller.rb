@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :followees, :followers]
   before_action :create_post, only:[ :show]
 
   def index
@@ -19,6 +19,16 @@ class UsersController < ApplicationController
     #FIXME_AB: I guess, whenever we will be using timeline we need associations. So shouldn't we eager load associations within the timeline.
     #fixed
     @tweets = current_user.timeline
+  end
+
+  def followees
+    @users = @user.followees
+    render action: 'index'
+  end
+
+  def followers
+    @users = @user.followers
+    render action: 'index'
   end
 
   def change_privacy

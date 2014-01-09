@@ -12,7 +12,7 @@ class Following < ActiveRecord::Base
 
   
   def prevent_self_retweet
-    errors.add(:base, "you cannot follow your self") if user_id == followee_id
+    errors.add(:base, "You cannot follow your self") if user_id == followee_id
   end
   
 end

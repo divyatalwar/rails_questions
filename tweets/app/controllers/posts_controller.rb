@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_user_post, only: [:retweet]
   skip_before_action :authorize, only: [:index]
-  before_action :set_tags, only: [:create]
+  before_action :set_tag_params, only: [:create]
 
  #FIXME_AB: Why I am not allowed to see public timeline if I am not logged in?
  #fixed
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def user_tags
-    @tweets = Tweet.with_tags(current_user)
+    @tweets = Tweet.by_user_tag(current_user)
     render action: 'index'
   end
 
@@ -54,13 +54,12 @@ class PostsController < ApplicationController
     redirect_to_back_or_default_url if @tweet.nil?
   end
 
-  def set_tags
+  def set_tag_params
     params[:post][:content].gsub!(/@\w+/i) do |tag| 
       tagged_user = User.find_by(username: tag.split('@')[1])
       user_id = tagged_user.nil? ? "" : tagged_user.id
       params[:post][:tags] += " " + user_id.to_s + " "
-      tag.delete! '@'
-      
+      tag.delete '@'
     end
   end
 
