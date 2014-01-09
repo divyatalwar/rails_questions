@@ -7,11 +7,11 @@
     <% end %>
     <% #FIXME_AB: Can you reduce number of queries fired in below  #fixed-%>
     <% if @user.tweets.present? %>
-    <div class ="comment_panel">
-      <div class="posts">Posts </div>
-    <%= render @user.tweets.eager_loading_associations %>
-  </div>
-</div>
-<%end%>
+      <div class ="comment_panel">
+        <div class="posts">Posts </div>
+          <%= render @user.tweets.eager_loading_associations %>
+        </div>
+      </div>
+    <%end%>
   </div>
 </div>
