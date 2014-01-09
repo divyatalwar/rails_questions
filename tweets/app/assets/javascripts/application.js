@@ -56,7 +56,7 @@ ApplicationEventHandler.prototype = {
               }
             });
           },
-          error: function(a,b,c){
+          error: function(a, b, c){
           }
         });
       }
