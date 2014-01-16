@@ -1,0 +1,9 @@
+<% @questions.each do |question| %>
+  <div class = "tests">
+    <%= "[" + question.question_type + "]" %>
+    <span class = "show", data-name = '<%=question.id%>'><%= link_to "Question " + question.id.to_s , admin_question_path(id: question.id) %></span>
+     <div class="question_text hidden", data-id= '<%= question.id%>'>
+      <%= render :template => 'admin/questions/show', locals: {:@question => question} %>
+    </div>
+  </div>
+<%end%>

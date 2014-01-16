@@ -1,0 +1,9 @@
+
+<div class="questions">
+  <div class="heading"> Quiz code  <%= @quiz.unique_code %></div>
+  <% count = 0 %>
+  <% @quiz.questions.each do |question| %>
+    <% count += 1 %>
+    <%= render template: 'admin/questions/show', locals: {:@question => question, :@count => count } %>
+  <%end%>
+</div>

@@ -1,0 +1,395 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+.hidden {
+  display: none;
+}
+
+.question {
+
+  background-color: #f9f9f9;
+  margin:0 auto;
+  width:560px;
+  border: solid 1px black;
+  /*margin-left: -38px;*/
+
+}
+#notice {
+  color: #000 !important;
+  border: 3px solid green;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+#alert {
+  color: #000 !important;
+  border: 3px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+.score_details{
+  width:300px;
+  display: inline-block;
+  font-size:15px;
+  font-weight: bold;
+}
+.result{
+display: inline-block;
+font-size: 15px;
+font-weight: bold;
+float: right;
+padding-right: 10px;
+}
+.quiz_id{
+  display: inline-block;
+  width:300px;
+  text-align:  center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.take_quiz {
+text-align: center;
+display: inline-block;
+font-size: 18px;
+width: 125px;
+height: 25px;
+padding-top: 5px;
+background-color: #C9C7C7;
+border-radius: 5px;
+
+}
+.quioz {
+padding-top: 10px;
+padding-bottom: 10px;
+border-bottom: dotted 1px black;
+
+}
+.quiz_unique_code{
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  color:blue;
+  width:400px;
+}
+
+.logout {
+  display: inline-block;
+  float: right;
+
+}
+
+body {
+
+
+}
+
+.tab {
+font-style: italic;
+display: inline-block;
+
+}
+ul,li { 
+  margin-left:0px;
+  padding-left:0px;
+  padding-right:0px;
+}
+a:visited,a:link,a:hover{
+ 
+}
+#outer > li:first-child > a {
+  margin-left:0px;
+ }
+#outer li ul {
+  list-style-type :none;
+  display:none;
+  position:absolute;
+}
+#outer {
+display:inline-block;
+border-bottom: solid 1px #6d6d6d;
+width:auto;
+}
+#outer li {
+display:inline-block;
+ }
+ #outer {
+  font-style: 20px !important;
+ }
+#outer li a{
+  font-family: Georgia;
+  font-style :italic;
+  font-size:18px;
+  color:black;
+  background-color:#CFCFCF;
+  padding-left:20px;
+  padding-right:20px;
+  height:25px;
+  margin-left:2px;
+  border:solid 1px #CFCFCF;
+  display: inline-block;
+  border-bottom-width:1px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+#outer > li:hover  a {
+  color:#8c8c8c;
+  background-color:white;
+  border: solid 1px black;
+  border-bottom-style:hidden;
+  
+}
+#outer > li:hover ul {
+  display: block;
+  border:solid 1px #6d6d6d;
+  border-top-style:hidden;
+  background-color:white;
+  width:200px;
+  padding:10px;
+  margin-left:2px; 
+  border-top:0px; 
+  margin-top:1px;
+}
+#outer > li:first-child:hover > ul {
+  margin-left:0px; 
+  margin-top:1px;}
+  #outer li:hover ul li a {
+  font-family:Georgia;
+  font-style : italic;
+  font-size:14px;
+  color:black;
+  padding-top:5px;
+  padding-bottom:0px;
+  display:block;
+  text-decoration:none;
+  border:none;
+  padding-left:0px;
+}
+#outer li:hover ul li:hover a {
+  font-family:Georgia;
+  font-style : italic;
+  font-size:14px;   
+  color:#bd0707;
+}
+#outer li ul li{
+  border-bottom:solid 1px #CFCFCF;
+  width:100%;
+}
+#outer li ul li:last-child{
+  border-bottom:none;}
+ 
+
+
+
+
+.navigation_tabs{
+  font-style: bold;
+  font-weight: bold;
+  font-size: 15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+
+  padding-top: 10px;
+
+
+}
+
+.quizzes{
+  margin: 0 auto;
+  width:1000px;
+  border: solid 1px black;
+
+
+}
+.user_delete{
+padding-top: 2px;
+padding-bottom: 3px;
+padding-right: 4px;
+padding-left: 4px;
+color: black !important;
+border: dotted 1px black;
+background-color: #F03A41;
+a {
+  color: white !important;
+}
+a:hover {
+  background-color: none !important;
+  color: none !important;
+}
+}
+
+.user_info {
+  width:600px;
+  background-color: #f9f9f9;
+  margin: 0 auto;
+  td{
+    border: dotted 1px black;
+  }
+  td:odd{
+    text-align: right;
+  }
+  th{
+    border:solid 1px black;
+  }
+}
+.next{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  float: right;
+}
+.quiz_display{
+  height:300px;
+  width:600px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border: dotted 1px black;
+
+}
+.questions {
+  background-color: black;
+  margin:0 auto;
+  width:580px;
+  border: solid 1px black;
+
+}
+
+.quiz {
+ 
+margin: 0 auto;
+border: solid 1px black;
+width:600px;
+
+
+
+}
+.select {
+position: absolute;
+left:580px;
+}
+.tests {
+padding-top: 10px;
+padding-bottom: 10px;
+font-weight: bold;
+font-size: 15px;
+}
+
+.question_list {
+  padding-top: 30px;
+ padding-left: 30px;
+}
+.heading{
+  background-color: #f9f9f9;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+
+}
+#error_explanation{
+margin: 0 auto;
+ul {
+li {
+text-decoration: none !important;
+list-style: none !important;
+}
+}
+
+}
+
+
+.question_type {
+  float:right;
+  height:20px;
+  font-weight: bold;
+  float: right;
+  padding-bottom: 10px;
+  padding-top: 3px;
+}
+
+.choice_list {
+  position: relative;
+  float: right;
+  margin-top: 50px;
+  padding-bottom: 20px;
+  font-weight: bold;
+left:100px;
+}
+
+.content {
+  font-weight: bold;
+  font-size: 18px;
+  padding-top:40px;
+  padding-left: 30px;
+
+  input{
+    width:300px !important;
+
+  }
+}
+
+.question_content{
+
+padding-left: 30px;
+padding-bottom: 10px;
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.choices {
+  padding-left: 40px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.question_number, .user_question_content {
+  display: inline-block;
+
+}
+.question_number{
+
+  font-size: 17px;
+  font-style: bold;
+  padding-right: 10px;
+}
+
+.user_question_content{
+  font-size:20px;
+  font-weight: bold;
+
+}
+
+.generate_quiz {
+  padding-top: 30px;
+}
+
+.answer_choices {
+
+  padding-left: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.create_question {
+  padding-left: 40px;
+  margin: 0 auto;
+
+}

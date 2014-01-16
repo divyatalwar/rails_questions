@@ -1,0 +1,30 @@
+<% if @quizzes.exists? %>
+  <div  class = "quizzes">
+    <div class="quioz">
+      <div class="quiz_id">ID </div>
+      <div class="quiz_unique_code"> CODE </div>
+      <div class="take_quiz"> ACTION</div>
+    </div>
+    <% @quizzes.each do | quiz| %>
+      <div class="quioz" >
+        <div class = "quiz_id"> 
+          <%= link_to_if current_user.admin?, quiz.id , admin_quiz_path(id: quiz.unique_code) %>
+        </div>
+        <div class = "quiz_unique_code">
+          <%= quiz.unique_code %>
+        </div>
+        <% if !current_user.admin? %> 
+          <% if !quiz.has_already_been_taken?(current_user) %>
+            <div class ="take_quiz">
+              <%= link_to 'Take dis quiz', quiz_path(id: quiz.unique_code) %>
+            </div>
+          <%else%>
+            Score is: <%= quiz.results.by_user(current_user.id)[0].score %>
+          <%end%>
+        <%else%>
+          <span class="user_delete"><%= link_to 'View Details', admin_quiz_path(id: quiz.unique_code) %></span>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+<%end%> 

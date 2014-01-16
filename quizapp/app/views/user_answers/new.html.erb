@@ -1,0 +1,18 @@
+
+<div class = "quiz_display" >
+  <%= form_for (@user_answer) do |f| %>
+    <%= render template: 'admin/questions/show', locals: {:@question => @question } %>
+    <%= f.hidden_field :quiz_id, :value => @quiz.id %>
+    <%= f.hidden_field :question_id, :value => @question.id %>
+    <%= f.hidden_field :choice_id %>
+    <%= hidden_field_tag :unique_code, @quiz.unique_code %>
+    <%= hidden_field_tag 'page',   params[:page] ? params[:page] : 1 %>
+    <div class = "next" >
+      <% if((params[:page].presence.to_i || 1) == @quiz.questions.length) %>
+        <%= f.submit 'Finish'%>
+      <%else%>
+        <%= f.submit 'Next' %>
+      <%end%>
+    </div>
+  <%end%>
+</div>

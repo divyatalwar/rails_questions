@@ -1,0 +1,29 @@
+<div class = "quiz">
+  <div class="heading"> List of questions </div>
+  <div class = "question_list error_messages">
+    <%= render "shared/error_messages", :target => @quiz if @quiz.errors.present? %>  
+    <% count = 0 %>
+    <%= form_for [:admin, @quiz] ,  :html => { :class => 'quiz_form' } do |f| %>
+      <%= f.fields_for :tests do |builder| %>
+        <div class = "tests">
+          <% question = @questions[count] %>
+          <%= "[" + question.question_type + "]" %>
+          <span class = "show", data-name = '<%=question.id%>'><%= link_to "Question " + question.id.to_s , admin_question_path(id: question.id) %></span>
+          <span class="select"><%= check_box_tag '[quiz][tests_attributes][' + count.to_s + '][_destroy]' , false %></span>
+          <%= builder.hidden_field :question_id, :value => question.id %>
+          <div class="question_text hidden", data-id= '<%= question.id%>'>
+            <%= render :template => 'admin/questions/show', locals: {:@question => question} %>
+          </div>
+        </div>
+        <% count += 1 %>
+      <%end%>
+      <div class="actions generate_quiz quiz_submit">
+        <% if @quiz.errors.present? %>
+          <span class="user_delete"><%= link_to "Back", :back %></span>
+        <%else%>
+          <%= f.submit "Generate Quiz" %>
+        <%end%>
+      </div>
+    <% end %>
+  </div>
+</div>

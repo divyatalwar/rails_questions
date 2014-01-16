@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quizapp</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if current_user %>
+    <div class="navigation_tabs">
+      <% if current_user.admin?%>
+        <div class = "tab">
+          <ul id = "outer"> 
+            <li><%= link_to "Home", root_path %></li>
+          </ul>
+        </div>
+        <div class = "tab">
+          <ul id = "outer"> 
+            <li><%= link_to "Question", "" %>
+              <ul>
+                <li> <%= link_to "Create", new_admin_question_path %></li>
+                <li> <%= link_to "View analytical", admin_questions_path(question_type: 'Analytical') %></li>
+                <li> <%= link_to "View single-choice", admin_questions_path(question_type: 'Single-Choice') %></li>
+                <li> <%= link_to "View all", admin_questions_path %></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class = "tab">
+          <ul id = "outer"> 
+            <li><%= link_to "Quiz", "" %>
+              <ul>
+                <li> <%= link_to "Create", new_admin_quiz_path %></li>
+                <li> <%= link_to "View", admin_quizzes_path %></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class = "tab">
+          <ul id = "outer">
+            <li><%= link_to "Manage users", admin_users_path %></li>
+          </ul>
+        </div>
+      <%end%>
+      <div class = "logout">
+        <%= link_to "Back", root_path %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %></div>
+      </div>
+    <%end%>
+    <%= render 'shared/notice' %>
+    <%= yield %>
+  </body>
+</html>

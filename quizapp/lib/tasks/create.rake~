@@ -1,0 +1,12 @@
+namespace :admin do
+  desc "To create an admin"
+  task :create => :environment do 
+    print "Enter user name: "
+    username = $stdin.gets.chomp
+    print "Enter email: "
+    email= $stdin.gets.chomp
+    admin = User.new(:username=>last_name,:email=>email,:user_type=>"admin")
+    admin.save!
+    puts "Admin created"
+  end
+end

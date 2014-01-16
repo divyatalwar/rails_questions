@@ -1,0 +1,32 @@
+<%= render "shared/error_messages", :target => @question if @question.errors.present? %>
+  <div class ="question_create">
+  <div class="question">
+    <div class="heading">GENERATE QUESTION </div>
+    <%= form_for [:admin, @question] do |f| %>
+      <div class ="question_type">
+        TYPE:
+        <%= f.select :question_type, options_for_select(QUESTION_TYPE, :selected => params[:question_type]), prompt: "Select a type" %>
+      </div>
+      <div class="choice_list">
+        CHOICES:
+        <%= select_tag :no_of_choices, options_for_select(get_number_of_questions, :selected => params[:selectbox]),{:disabled => params[:question_type] == 'Analytical'} %>
+      </div>
+      <div class ="content" >
+        <%= f.label :description, "Enter your Question" %><br>
+        <%= f.text_area :description, :rows => 5, :cols => 60, :value => params[:content] %>
+      </div>
+      <div class ="nested_fields" >
+        <%= add_nested_fields(params[:selectbox].to_i || 0, f.object, f, :choices)  if params[:question_type] == 'Single-Choice'%>
+      </div>
+      <div class ="boolean" >
+        <%= add_boolean_nested_fields(2, f.object, f, :choices) if params[:question_type] == 'Analytical' %>
+      </div>
+      <div class="actions create_question">
+        <div>
+          <%= f.submit %>
+          <span class="user_delete"><%= link_to "Cancel", admin_questions_path %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
