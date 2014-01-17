@@ -1,25 +1,14 @@
 Quizapp::Application.routes.draw do
 
 
-
-  # resources :results
-
-  # resources :users
-
-  resources :choices
-
-  resources :questions
-
-  resources :tests
-
-  resources :quizzes
-  resources :user_answers
+  resources :quizzes, only:[:show, :index]
+  resources :user_answers, only: [:new, :index, :create]
   get 'result', to: 'quizzes#result', as: :result
 
   namespace :admin  do
-    resources :questions
-    resources :quizzes
-    resources :users
+    resources :questions, only: [:index, :new, :show]
+    resources :quizzes, only: [:index, :new, :show]
+    resources :users, only: [:index]
   end
 
 devise_for :user, controllers: {
