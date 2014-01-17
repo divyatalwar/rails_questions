@@ -8,7 +8,7 @@
     <% @question.choices.each do |choice| %>
 
       <div class="answer_choices">
-        <%= radio_button_tag '[user_answer][choice][' +choice.id.to_s + '][_destroy]', "",check_user_type(params, choice), :disabled => check_user_type(params, ""), :class => 'checked' %>
+        <%= radio_button_tag '[user_answer][choice][' + choice.id.to_s + '][_destroy]', "", check_user_type(params, choice), :disabled => check_user_type(params, ""), :class => 'checked' %>
         <%= choice.content %>  
       </div>
     <%end%>
