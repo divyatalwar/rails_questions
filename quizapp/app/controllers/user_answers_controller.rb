@@ -39,6 +39,6 @@ class UserAnswersController < ApplicationController
   end
 
   def user_answers_params
-    params.require(:user_answer).permit(:choice_id, :quiz_id,:question_id)
+    params.require(:user_answer).permit(:choice_id, :quiz_id, :question_id)
   end
 end
