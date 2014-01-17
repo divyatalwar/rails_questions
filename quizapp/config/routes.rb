@@ -6,8 +6,8 @@ Quizapp::Application.routes.draw do
   get 'result', to: 'quizzes#result', as: :result
 
   namespace :admin  do
-    resources :questions, only: [:index, :new, :show]
-    resources :quizzes, only: [:index, :new, :show]
+    resources :questions, only: [:index, :new, :show, :create]
+    resources :quizzes, only: [:index, :new, :show, :create]
     resources :users, only: [:index]
   end
 
