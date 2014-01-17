@@ -25,6 +25,16 @@
   /*margin-left: -38px;*/
 
 }
+
+.label,.text {
+display:inline-block;
+width:270px;
+font-weight:bold;
+}
+.active {
+  background-color:#effbfb !important;
+
+}
 #notice {
   color: #000 !important;
   border: 3px solid green;
@@ -70,6 +80,17 @@ height: 25px;
 padding-top: 5px;
 background-color: #C9C7C7;
 border-radius: 5px;
+
+}
+.take_quizz {
+text-align: center;
+display: inline-block;
+font-size: 18px;
+width: 125px;
+height: 25px;
+padding-top: 5px;
+font-weight:bold;
+
 
 }
 .quioz {

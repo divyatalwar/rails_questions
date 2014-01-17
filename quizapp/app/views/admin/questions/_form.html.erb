@@ -1,8 +1,10 @@
+<div class="error_messages">
+</div>
 <%= render "shared/error_messages", :target => @question if @question.errors.present? %>
   <div class ="question_create">
   <div class="question">
     <div class="heading">GENERATE QUESTION </div>
-    <%= form_for [:admin, @question] do |f| %>
+    <%= form_for [:admin, @question], :html => {:class => 'quiz_form' }, :remote => true do |f| %>
       <div class ="question_type">
         TYPE:
         <%= f.select :question_type, options_for_select(QUESTION_TYPE, :selected => params[:question_type]), prompt: "Select a type" %>
@@ -21,7 +23,7 @@
       <div class ="boolean" >
         <%= add_boolean_nested_fields(2, f.object, f, :choices) if params[:question_type] == 'Analytical' %>
       </div>
-      <div class="actions create_question">
+      <div class="actions create_question quiz_submit">
         <div>
           <%= f.submit %>
           <span class="user_delete"><%= link_to "Cancel", admin_questions_path %></span>

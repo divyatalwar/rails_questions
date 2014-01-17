@@ -5,7 +5,7 @@ module ApplicationHelper
     i = -1
    form_object_builder.fields_for nested_form_builder.to_sym do |builder|
       i = i + 1
-      render :partial => "admin/questions/choice" , :locals => {:@counter => i+1, :@no_of_questions => number, :f => builder }
+      render :partial => "admin/questions/choice" , :locals => {:@counter => i + 1, :@no_of_questions => number, :f => builder }
     end
   end
 
@@ -36,15 +36,13 @@ module ApplicationHelper
     end
   end
 
-  # def get_quiz_status(quiz)
-  #   if quiz.user_answers.present? && quiz.user_answers.where(user_id: current_user.id).present?
-  #   a =  Question.count
-  #   a.times do
-  #     object.tests.build
-  #   end
-  #   object.tests
-  # end
-
+  def is_active?(page_name)
+    if page_name == 'root'
+      "active" if params[:controller] == 'quizzes'
+    else
+      "active" if params[:controller] == 'admin/' + page_name
+    end
+  end
 
 
 end

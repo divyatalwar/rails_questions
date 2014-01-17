@@ -1,9 +1,9 @@
 <% if @quizzes.exists? %>
   <div  class = "quizzes">
     <div class="quioz">
-      <div class="quiz_id">ID </div>
-      <div class="quiz_unique_code"> CODE </div>
-      <div class="take_quiz"> ACTION</div>
+      <div class="quiz_id"> ID </div>
+      <div class="quiz_unique_code"> QUIZ CODE </div>
+      <div class="take_quizz"> ACTION </div>
     </div>
     <% @quizzes.each do | quiz| %>
       <div class="quioz" >
@@ -14,7 +14,7 @@
           <%= quiz.unique_code %>
         </div>
         <% if !current_user.admin? %> 
-          <% if !quiz.has_already_been_taken?(current_user) %>
+          <% if !quiz.attempted?(current_user) %>
             <div class ="take_quiz">
               <%= link_to 'Take dis quiz', quiz_path(id: quiz.unique_code) %>
             </div>

@@ -1,5 +1,5 @@
 class Admin::QuizzesController < Admin::AdminBaseController
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz, only: [:show]
 
   
   def index
@@ -12,7 +12,7 @@ class Admin::QuizzesController < Admin::AdminBaseController
 
   def new
     @quiz = Quiz.new
-    @questions = Question.includes(:choices)
+    @questions = Question.all
     @tests = @questions.count.times do
       @quiz.tests.build
     end
@@ -21,12 +21,15 @@ class Admin::QuizzesController < Admin::AdminBaseController
 
   def create
     @quiz = Quiz.new(quiz_params)
-    if @quiz.save
-      redirect_to admin_quiz_path(id: @quiz.unique_code), notice: 'Quiz was successfully created.'
-    else
-      render action: 'new', alert: 'Quiz could not be saved'
+    respond_to do |format|
+      if @quiz.save
+        flash[:notice] = 'Quiz was successfully created.'
+        format.js { render js: %(window.location.href='#{admin_quiz_path(id: @quiz.unique_code)}')}
+      else
+        format.js {render "shared/_error_messages", locals: { :target => @quiz } }
+      end
     end
-  end
+ end
 
 
 

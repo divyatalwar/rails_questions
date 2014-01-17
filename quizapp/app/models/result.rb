@@ -3,10 +3,10 @@ class Result < ActiveRecord::Base
   validates_uniqueness_of :quiz_id, scope: :user_id
   belongs_to :quiz, touch: true
   belongs_to :user
-  scope :by_user, ->(user_id) { where('results.user_id = ? ', user_id)}
+  scope :by_user, ->(user_id) { where('user_id = ? ', user_id)}
 
   def incorrect
-    quiz.questions.length - score
+    quiz.questions.size - score
   end
 
 end

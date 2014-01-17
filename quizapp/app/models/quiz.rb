@@ -12,6 +12,7 @@ class Quiz < ActiveRecord::Base
   accepts_nested_attributes_for :tests, update_only: true, reject_if: proc { |attributes| attributes['_destroy'].blank? }
  
   default_scope { order('quizzes.updated_at asc') }
+  
   after_commit :generate_unique_code
 
   def questions_presence
@@ -29,7 +30,7 @@ class Quiz < ActiveRecord::Base
     "#{unique_code}".parameterize
   end
 
-  def has_already_been_taken?(user)
+  def attempted?(user)
     users.include?(user)
   end
  

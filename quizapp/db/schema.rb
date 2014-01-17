@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115125223) do
+ActiveRecord::Schema.define(version: 20140117072238) do
 
   create_table "choices", force: true do |t|
     t.integer  "question_id"
@@ -49,12 +49,18 @@ ActiveRecord::Schema.define(version: 20140115125223) do
     t.datetime "updated_at"
   end
 
+  add_index "tests", ["question_id"], name: "index_tests_on_question_id", using: :btree
+
   create_table "user_answers", force: true do |t|
     t.integer "user_id"
     t.integer "choice_id"
     t.integer "quiz_id"
     t.integer "question_id"
   end
+
+  add_index "user_answers", ["choice_id"], name: "index_user_answers_on_choice_id", using: :btree
+  add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id", using: :btree
+  add_index "user_answers", ["quiz_id"], name: "index_user_answers_on_quiz_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -28,7 +28,10 @@ class UserAnswersController < ApplicationController
 
   def set_quiz
     @quiz = Quiz.find_by(unique_code: params[:unique_code])
-    redirect_to_back_or_default_url if @quiz.nil?
+    if @quiz.nil?
+      flash[:alert] = "Quiz you are looking for does not exist"
+      redirect_to_back_or_default_url 
+    end
   end
 
   def set_choice

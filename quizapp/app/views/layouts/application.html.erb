@@ -12,12 +12,12 @@
       <% if current_user.admin?%>
         <div class = "tab">
           <ul id = "outer"> 
-            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Home", root_path , :class => is_active?('root') %></li>
           </ul>
         </div>
         <div class = "tab">
           <ul id = "outer"> 
-            <li><%= link_to "Question", "" %>
+            <li><%= link_to "Question", "" , :class => is_active?('questions')%>
               <ul>
                 <li> <%= link_to "Create", new_admin_question_path %></li>
                 <li> <%= link_to "View analytical", admin_questions_path(question_type: 'Analytical') %></li>
@@ -29,7 +29,7 @@
         </div>
         <div class = "tab">
           <ul id = "outer"> 
-            <li><%= link_to "Quiz", "" %>
+            <li><%= link_to "Quiz", "" ,:class => is_active?('quizzes')%>
               <ul>
                 <li> <%= link_to "Create", new_admin_quiz_path %></li>
                 <li> <%= link_to "View", admin_quizzes_path %></li>
@@ -39,7 +39,7 @@
         </div>
         <div class = "tab">
           <ul id = "outer">
-            <li><%= link_to "Manage users", admin_users_path %></li>
+            <li><%= link_to "Manage users", admin_users_path, :class => is_active?('users')%></li>
           </ul>
         </div>
       <%end%>

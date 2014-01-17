@@ -1,9 +1,11 @@
+<div class =" error_messages">
+</div>
 <div class = "quiz">
   <div class="heading"> List of questions </div>
-  <div class = "question_list error_messages">
+  <div class = "question_list">
     <%= render "shared/error_messages", :target => @quiz if @quiz.errors.present? %>  
     <% count = 0 %>
-    <%= form_for [:admin, @quiz] ,  :html => { :class => 'quiz_form' } do |f| %>
+    <%= form_for [:admin, @quiz] ,  :html => { :class => 'quiz_form' } , :remote =>  true do |f| %>
       <%= f.fields_for :tests do |builder| %>
         <div class = "tests">
           <% question = @questions[count] %>
@@ -18,11 +20,7 @@
         <% count += 1 %>
       <%end%>
       <div class="actions generate_quiz quiz_submit">
-        <% if @quiz.errors.present? %>
-          <span class="user_delete"><%= link_to "Back", :back %></span>
-        <%else%>
-          <%= f.submit "Generate Quiz" %>
-        <%end%>
+        <%= f.submit "Generate Quiz" %>
       </div>
     <% end %>
   </div>

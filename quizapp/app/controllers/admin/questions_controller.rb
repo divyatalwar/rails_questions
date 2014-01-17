@@ -1,5 +1,5 @@
 class Admin::QuestionsController < Admin::AdminBaseController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show]
 
  
   def index
@@ -19,11 +19,13 @@ class Admin::QuestionsController < Admin::AdminBaseController
 
   def create
     @question = Question.new(question_params)
-    if @question.save
-      flash[:notice] = 'Question was successfully created.'
-      redirect_to admin_question_path(@question)
-    else
-      render action: 'new' 
+    respond_to do |format|
+      if @question.save
+        flash[:notice] = 'Question was successfully created.'
+        format.js { render js: %(window.location.href='#{admin_question_path(@question)}')}
+      else
+        format.js {render "shared/_error_messages", locals: { :target => @question } }
+      end
     end
   end
 

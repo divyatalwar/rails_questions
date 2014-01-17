@@ -14,7 +14,6 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.countdown.js
 //= require_tree .
 
 
@@ -31,6 +30,7 @@ ApplicationHandler.prototype = {
     this.questionHandler();
     this.radiobuttonHandler();
     this.questionTypeFieldHandler();
+    this.errorHandler();
   },
 
   choicesFieldHandler: function(){
@@ -73,6 +73,18 @@ ApplicationHandler.prototype = {
         $('#no_of_choices').addClass('hidden')
       }
     })
+  },
+  errorHandler:function(){
+
+    $(document).on('click', '.quiz_submit', function(){
+      $(document).on('ajax:error' , '.quiz_form', function(evt, xhr, status, error){
+        $('div.error_messages').removeClass('hidden')
+        $('div.error_messages').find("#error_explanation").remove()
+        $('div.error_messages').html(xhr.responseText)
+      })
+    })
+
   }
+
 }
 
