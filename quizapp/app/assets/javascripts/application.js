@@ -19,84 +19,60 @@
 
 
 $(document).ready(function(){
-  $('.nested_fields').removeClass('hidden')
+  var applicationHandler = new ApplicationHandler();
+})
+var ApplicationHandler = function() {
+  this.init();
 
-  $(document).on('change','#no_of_choices, #question_question_type',function(){
-    $('.nested_fields').removeClass('hidden')
-    
-    $.ajax({
-      type: 'get',
-      url: 'http://localhost:3000/admin/questions/new' + '?selectbox=' + $('#no_of_choices').val() + '&question_type=' + $('#question_question_type').val() + '&content=' + $('#question_description').val(),
-      dataType: 'html',
-      success: function(data) {
-        h = $(data).filter('.question_create')
+}
+ApplicationHandler.prototype = {
+  init: function() {
+    this.choicesFieldHandler();
+    this.questionHandler();
+    this.radiobuttonHandler();
+    this.questionTypeFieldHandler();
+  },
 
-        $('.question_create').html(h)
-      }
-    })
-
-
-
-
-  // window.location.href =  'http://localhost:3000/questions/new' + '?selectbox=' + $('#no_of_choices').val()
-    
-
-  })
-
-  
-  $(document).on('click', '.show', function(e){
-    e.preventDefault();
-     $('div.question_text[data-id = "' + $(this).attr('data-name') + '"]').toggle('blind', 1000);
-     $('div.question_text[data-id = "' + $(this).attr('data-name') + '"]').toggleClass('hidden').animate(2000);
-
-
-  
-    })
-  $(document).on('click' ,'.checked',function(){
-    $('.checked').prop('checked',false)
-    $(this).prop('checked',true)
-  })
-
-   $(document).on('click', '.quiz_submit', function(){
-
-      $(document).on('ajax:error' , '.quiz_form', function(evt, xhr, status, error){
-        alert(evt)
-        alert(xhr)
-        alert(status)
-        alert(error)
-        error = $(xhr).filter('#error_explanation')
-        $('div.error_messages').removeClass('hidden')
-        $('div.error_messages').find("#error_explanation").remove()
-        $('div.error_messages').append(error)
+  choicesFieldHandler: function(){
+    $(document).on('change','#no_of_choices, #question_question_type',function(){
+      $('.nested_fields').removeClass('hidden')
+      url = $('#no_of_choices').data('path')
+      $.ajax({
+        type: 'get',
+        url: url + '?selectbox=' + $('#no_of_choices').val() + '&question_type=' + $('#question_question_type').val() + '&content=' + $('#question_description').val(),
+        dataType: 'html',
+        success: function(data) {
+          filtered_data = $(data).filter('.question_create')
+          $('.question_create').html(filtered_data)
+        }
       })
     })
+  },
+  questionHandler:function(){
+    $(document).on('click', '.show', function(e){
+      e.preventDefault();
+      $('div.question_text[data-id = "' + $(this).attr('data-name') + '"]').toggle('blind', 1000);
+      $('div.question_text[data-id = "' + $(this).attr('data-name') + '"]').toggleClass('hidden').animate(2000);
+    })
+  },
+  radiobuttonHandler:function(){
+    $(document).on('click' ,'.checked',function(){
+      $('.checked').prop('checked',false)
+      $(this).prop('checked',true)
+    })
+  },
 
-  $(document).on('change', '#question_question_type', function(){
-    $('.choice_list').removeClass('hidden')
-    $('.nested_fields').removeClass('hidden')
-    $('#no_of_choices').removeClass('hidden')
-    if($(this).val() == "Analytical"){
-      $('.choice_list').addClass('hidden')
-      $('.nested_fields').addClass('hidden')
-      $('#no_of_choices').addClass('hidden')
-    }
+  questionTypeFieldHandler:function(){
+    $(document).on('change', '#question_question_type', function(){
+      $('.choice_list').removeClass('hidden')
+      $('.nested_fields').removeClass('hidden')
+      $('#no_of_choices').removeClass('hidden')
+      if($(this).val() == "Analytical"){
+        $('.choice_list').addClass('hidden')
+        $('.nested_fields').addClass('hidden')
+        $('#no_of_choices').addClass('hidden')
+      }
+    })
+  }
+}
 
-
-  })
-
-})
-document.addEventListener("page:load", function(){
-//   if($('#device_type').val() !="")
-//     $('.'+ $('#device_type').val()).removeClass('hidden')
-
-// $(document).on('change','#device_type',function(){
-//     $('.Printing1').addClass('hidden')
-//     $('.Network1').addClass('hidden')
-//     $('.' + $(this).val()).removeClass('hidden')
-
-//   })
-//   $(document).on('click' ,'.checked',function(){
-//     $('.checked').prop('checked',false)
-//     $(this).prop('checked',true)
-//   })
-});

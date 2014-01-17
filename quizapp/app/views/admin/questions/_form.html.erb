@@ -9,7 +9,7 @@
       </div>
       <div class="choice_list">
         CHOICES:
-        <%= select_tag :no_of_choices, options_for_select(get_number_of_questions, :selected => params[:selectbox]),{:disabled => params[:question_type] == 'Analytical'} %>
+        <%= select_tag :no_of_choices, options_for_select(get_number_of_questions, :selected => params[:selectbox]),{:disabled => params[:question_type] == 'Analytical', data: { path: new_admin_question_path }}%>
       </div>
       <div class ="content" >
         <%= f.label :description, "Enter your Question" %><br>
