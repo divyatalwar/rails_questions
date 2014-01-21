@@ -20,7 +20,6 @@ class UserAnswersController < ApplicationController
   def redirect_to_next_or_result
     if (params[:page].to_i == (@quiz.questions.length))
       @result = @quiz.calculate_score(current_user)
-      Rails.logger.debug "!!@#{@result}"
       redirect_to result_path(@result)
     else
       redirect_to quiz_path(id: @quiz.unique_code, :page => params[:page].to_i + 1)

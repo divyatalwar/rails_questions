@@ -1,4 +1,4 @@
-
+<% if @question.present? %>
 <div class = "quiz_display" >
   <%= form_for (@user_answer) do |f| %>
     <%= render template: 'admin/questions/show', locals: { :@question => @question } %>
@@ -16,3 +16,4 @@
     </div>
   <%end%>
 </div>
+<%end%>
