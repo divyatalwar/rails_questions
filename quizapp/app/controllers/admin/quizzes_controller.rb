@@ -26,7 +26,7 @@ class Admin::QuizzesController < Admin::AdminBaseController
         format.js {render "shared/_error_messages", locals: { :target => @quiz } }
       end
     end
- end
+  end
 
 
 

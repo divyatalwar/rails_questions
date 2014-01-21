@@ -3,7 +3,7 @@ Quizapp::Application.routes.draw do
 
   resources :quizzes, only:[:show, :index]
   resources :user_answers, only: [:new, :index, :create]
-  get 'result', to: 'quizzes#result', as: :result
+  get 'result/:id', to: 'quizzes#result', as: :result
 
   namespace :admin  do
     resources :questions, only: [:index, :new, :show, :create]

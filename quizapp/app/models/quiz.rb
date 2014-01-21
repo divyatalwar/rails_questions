@@ -29,7 +29,8 @@ class Quiz < ActiveRecord::Base
   def calculate_score(user)
     correct = 0
      correct = choices.for_user(user.id).select { |choice| choice.correct }.count
-     Result.create(:user_id => user.id, :quiz_id => id, :score => correct) 
+    result = Result.create(:user_id => user.id, :quiz_id => id, :score => correct)
+    result 
   end
 
   def to_param

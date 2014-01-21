@@ -4,9 +4,9 @@ class Admin::QuestionsController < Admin::AdminBaseController
  
   def index
     if params[:question_type]
-      @questions = Question.includes(:choices).by_type(params[:question_type]).page(params[:page]).per(50)
+      @questions = Question.includes(:choices).by_type(params[:question_type])
     else
-      @questions = Question.includes(:choices).page(params[:page]).per(50)
+      @questions = Question.includes(:choices)
     end
   end
 

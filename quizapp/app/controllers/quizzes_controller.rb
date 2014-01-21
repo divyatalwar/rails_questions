@@ -1,8 +1,9 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :result]
+  before_action :set_quiz, only: [:show]
   before_action :get_questions, only: [:show]
   before_action :create_answer_instance, only: [:show]
   before_action :check_quiz_status, only:[ :show]
+  before_action :set_result, only: [:result]
 
  
 
@@ -41,6 +42,14 @@ class QuizzesController < ApplicationController
       @quiz = Quiz.find_by(unique_code: params[:id])
       if @quiz.nil?
         flash[:alert] = "Quiz you are looking for does not exist"
+        redirect_to_back_or_default_url
+      end
+    end
+
+    def set_result
+      @result = Result.find_by(id: params[:id])
+      if @result.nil?
+        flash[:alert] = "Your score is not available"
         redirect_to_back_or_default_url
       end
     end
