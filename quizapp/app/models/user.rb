@@ -19,13 +19,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def calculate_score(quiz_id)
-    correct = incorrect = 0
-    choices.for_quiz(quiz_id).each do |choice|
-      correct += 1 if choice.correct
-    end
-    Result.create(:user_id => id, :quiz_id => quiz_id, :score => correct)
-  end
+  
 
   
 end

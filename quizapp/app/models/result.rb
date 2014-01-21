@@ -1,6 +1,7 @@
 class Result < ActiveRecord::Base
-  validates :user_id, :quiz_id, :score, presence: true
-  validates_uniqueness_of :quiz_id, scope: :user_id
+  validates :user, :quiz, :score, presence: true
+  validates :score, numericality: { only_integer: true }
+  validates :quiz_id, uniqueness: { scope: :user_id }
   belongs_to :quiz, touch: true
   belongs_to :user
   scope :by_user, ->(user_id) { where('user_id = ? ', user_id)}

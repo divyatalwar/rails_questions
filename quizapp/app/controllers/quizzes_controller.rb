@@ -14,7 +14,7 @@ class QuizzesController < ApplicationController
   end
 
   def result
-    @result = current_user.calculate_score(@quiz.id)
+    # @result = current_user.calculate_score(@quiz.id)
   end 
   
 

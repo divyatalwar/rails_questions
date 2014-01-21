@@ -23,7 +23,7 @@ module ApplicationHelper
     end
   end
 
-
+  
   def check_user_type(hash, choice)
     if hash["controller"].start_with?('admin')
       if choice.present?

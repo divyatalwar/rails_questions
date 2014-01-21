@@ -13,9 +13,6 @@ class Admin::QuizzesController < Admin::AdminBaseController
   def new
     @quiz = Quiz.new
     @questions = Question.all
-    @tests = @questions.count.times do
-      @quiz.tests.build
-    end
   end
 
 

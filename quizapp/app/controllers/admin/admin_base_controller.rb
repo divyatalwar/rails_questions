@@ -1,3 +1,4 @@
+
 class Admin::AdminBaseController < ApplicationController
 
   before_action :authorize_as_admin
